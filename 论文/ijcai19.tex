@@ -1,0 +1,149 @@
+%%%% ijcai19.tex
+
+\typeout{IJCAI-19 Instructions for Authors}
+
+% These are the instructions for authors for IJCAI-19.
+
+\documentclass{article}
+\pdfpagewidth=8.5in
+\pdfpageheight=11in
+% The file ijcai19.sty is NOT the same than previous years'
+\usepackage{ijcai19}
+
+% Use the postscript times font!
+\usepackage{times}
+\usepackage{soul}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[small]{caption}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\urlstyle{same}
+
+% the following package is optional:
+%\usepackage{latexsym} 
+
+% Following comment is from ijcai97-submit.tex:
+% The preparation of these files was supported by Schlumberger Palo Alto
+% Research, AT\&T Bell Laboratories, and Morgan Kaufmann Publishers.
+% Shirley Jowell, of Morgan Kaufmann Publishers, and Peter F.
+% Patel-Schneider, of AT\&T Bell Laboratories collaborated on their
+% preparation.
+
+% These instructions can be modified and used in other conferences as long
+% as credit to the authors and supporting agencies is retained, this notice
+% is not changed, and further modification or reuse is not restricted.
+% Neither Shirley Jowell nor Peter F. Patel-Schneider can be listed as
+% contacts for providing assistance without their prior permission.
+
+% To use for other conferences, change references to files and the
+% conference appropriate and use other authors, contacts, publishers, and
+% organizations.
+% Also change the deadline and address for returning papers and the length and
+% page charge instructions.
+% Put where the files are available in the appropriate places.
+
+\title{Social Relationship Detection using Rules}
+
+% Single author syntax
+\author{
+    Sarit Kraus
+    \affiliations
+    Department of Computer Science, Bar-Ilan University, Israel \emails
+    pcchair@ijcai19.org
+}
+
+% Multiple author syntax (remove the single-author syntax above and the \iffalse ... \fi here)
+% Check the ijcai19-multiauthor.tex file for detailed instructions
+\iffalse
+\author{
+First Author$^1$
+\and
+Second Author$^2$\and
+Third Author$^{2,3}$\And
+Fourth Author$^4$
+\affiliations
+$^1$First Affiliation\\
+$^2$Second Affiliation\\
+$^3$Third Affiliation\\
+$^4$Fourth Affiliation
+\emails
+\{first, second\}@example.com,
+third@other.example.com,
+fourth@example.com
+}
+\fi
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Social relationships play a very important role in social network. Social relationship detection has attracted increasing attention, typically, which can help to understand the behavior of humen in our daily life. Previous social relationship detection models focused too much on relationships between the same pair and ignore the interplay of different relationships in the same scene.  We found that the interaction between the relationships in the same scene plays an important role in the detection of social relations and we can make meanful use of rules during inference. This paper proposes a novel model named {\it SRDR} which incorporates rules seamlessly into the deep learning model named {\it SR}  to solve the social relationship detection problem. It formulates inference as an integer linear programming (ILP) problem, with the objective function generated from {\it SR} and the constraints translated from rules. By incorporating rules, our approach can greatly reduce the solution space and significantly improve the inference accuracy of social relationship detection models. Experimental results on two classic data sets show that our approach significantly outperforms state-of-the-art  models in social relationship detection, which justifies the significance of incorporating rules seamlessly into the deep learning model in social relationship detection task.
+\end{abstract}
+
+\section{Introduction}
+
+This part will be written by {\bf liangjinrui} . This part will consist of the following sections:
+\begin{itemize}
+	\item The significance of social relation detection
+	\item {\bf [Example Figure]}
+	\item Analyze the shortcomings of the current model and introduce our model(based ILP)
+	\item Challenges
+	\item Contributions
+\end{itemize}
+
+\section{Related Work}
+
+This part will be written by {\bf liangjinrui} and it will be surveyed by {\bf liangjinrui} and {\bf chenhaicheng} by January 31.
+
+\subsection{Social Relationship Detection}
+Introduce social relationship detection including \cite{DBLP:conf/aaai/GuoWWWG18}, \cite{DBLP:conf/iccv/LiWZK17}, \cite{DBLP:conf/ijcai/WangWG15} and \cite{DBLP:conf/ijcai/WangCRYCL18}.
+
+
+\subsection{PIPA Dataset and PISC Dataset}
+
+Analyze characteristics of datasets.
+ 
+
+
+\subsection{Rules and ILP}
+
+Introduce rules and ILP referring to \cite{DBLP:conf/ijcai/WangWG15}
+
+
+
+\section{SRDR model}
+This part will be written by {\bf liangjinrui} and {\bf chenhaicheng}.
+{\bf [model figure]}
+
+[Introduce the total model]
+
+\subsection{Social Relationship Detection Model}
+\subsection{Imposing Rules}
+\subsection{Integrating by Integer Linear Programming}
+
+
+\section{Experiments}
+
+This part will be written by {\bf chenhaicheng}.
+\subsection{Experiment Setting}
+\subsection{Experiment Results}
+\subsection{Experiment Analysis}
+\subsection{Ablation Study}
+\subsection{Case Study}
+
+\section{Conclusion}
+This part will be written by {\bf liangjinrui}.
+
+\newpage
+%% The file named.bst is a bibliography style file for BibTeX 0.99c
+\bibliographystyle{named}
+\bibliography{ijcai19}
+
+\end{document}
+
