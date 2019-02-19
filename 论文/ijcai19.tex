@@ -22,6 +22,7 @@
 \usepackage{booktabs}
 \usepackage{algorithm}
 \usepackage{algorithmic}
+% \usepackage{cite}
 \urlstyle{same}
 
 % the following package is optional:
@@ -102,8 +103,11 @@ This part will be written by {\bf liangjinrui} . This part will consist of the f
 This part will be written by {\bf liangjinrui} and it will be surveyed by {\bf liangjinrui} and {\bf chenhaicheng} by January 31.
 
 \subsection{Social Relationship Detection}
-Introduce social relationship detection including \cite{DBLP:conf/aaai/GuoWWWG18}, \cite{DBLP:conf/iccv/LiWZK17}, \cite{DBLP:conf/ijcai/WangWG15} and \cite{DBLP:conf/ijcai/WangCRYCL18}.
+% Introduce social relationship detection including \cite{DBLP:conf/aaai/GuoWWWG18}, \cite{DBLP:conf/iccv/LiWZK17}, \cite{DBLP:conf/ijcai/WangWG15} and \cite{DBLP:conf/ijcai/WangCRYCL18}.
 
+The foundation of social network is the social relationships detection, an important multidisciplinary problem that has attracted increasing attention in computer vision recently. A much number of studies that aim to infer social relationships from images \cite{DBLP:conf/ijcai/WangWG15,DBLP:conf/iccv/LiWZK17,DBLP:conf/ijcai/WangCRYCL18,DBLP:conf/eccv/WangGLF10,DBLP:conf/iccv/ZhangLLT15} and videos \cite{DBLP:conf/eccv/DingY10,DBLP:conf/cvpr/RamanathanY013,DBLP:journals/ivc/VinciarelliPB09} have been made since the rise of deep learning. For instance, motivated by psychological sudies, \cite{DBLP:conf/iccv/ZhangLLT15} and \cite{DBLP:conf/iccv/DibekliogluSG13} exploit social relationships based on facial expression recognition and affective behaviour analysis. Besides, \cite{DBLP:conf/iccv/LiWZK17} and \cite{DBLP:conf/ijcai/WangCRYCL18} discover that contextual cues around people play a significant role in social realtionship infering. Concretely, \cite{DBLP:conf/iccv/LiWZK17} proposed a dual-glance model for social relationship, where the first glance makes a coarse relationship prediction for a given person pair and then the second one refines the prediction by using the objects around the pair. \cite{DBLP:conf/ijcai/WangCRYCL18} build a knowledge graph and employed Gated Graph Neural Network (GGNN) \cite{DBLP:journals/tomccap/LiSKJZW15} to integrate the graph into the Graph Reasoning Model (GRM), a deep neural network where a proper message propagation and graph attention mechanism are introduced to explore the interaction between person pair and the contextual objects.
+
+Unlike the aforementioned works which focus on facial expression information or contextual cues, we found that the interaction among the relationships in the same scene graph palys an important role in the detection of socail relations and we also used rules to refine the inference. Therefore, we proposed a novel model named {\it SRDR} which incorporates rules seamlessly into the deep learning model named {\it SR} to solve the social relationship detection problem. 
 
 \subsection{PIPA Dataset and PISC Dataset}
 
