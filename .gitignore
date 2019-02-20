@@ -1,5 +1,5 @@
 论文/complie.sh
-论文/*.swp
+论文/.*.swp
 论文/*.aux
 论文/*.bbl
 论文/*.blg
