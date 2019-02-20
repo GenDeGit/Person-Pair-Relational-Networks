@@ -1,0 +1,3 @@
+'friends', 'friends', 'friends', 'band_members', 'friends', 'friends'
+
+'father_child', 'lovers/spouses', 'mother_child', 'siblings', 'mother_child', 'siblings', 'siblings', 'father_child', 'father_child', 'mother_child'
