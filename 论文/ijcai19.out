@@ -1,7 +1,7 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.2}{Related Work}{}% 2
-\BOOKMARK [2][-]{subsection.2.1}{Social Relationship Detection}{section.2}% 3
-\BOOKMARK [2][-]{subsection.2.2}{PIPA Dataset and PISC Dataset}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.1}{Social Relationship Understanding}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Message Passing}{section.2}% 4
 \BOOKMARK [2][-]{subsection.2.3}{Rules and ILP}{section.2}% 5
 \BOOKMARK [1][-]{section.3}{SRDR model}{}% 6
 \BOOKMARK [2][-]{subsection.3.1}{Social Relationship Detection Model}{section.3}% 7

@@ -39,12 +39,28 @@ Junnan Li, Yongkang Wong, Qi~Zhao, and Mohan~S. Kankanhalli.
 \newblock In {\em {IEEE} International Conference on Computer Vision, {ICCV}
   2017, Venice, Italy, October 22-29, 2017}, pages 2669--2678, 2017.
 
+\bibitem[\protect\citeauthoryear{Lu \bgroup \em et al.\egroup
+  }{2016}]{DBLP:conf/eccv/LuKBL16}
+Cewu Lu, Ranjay Krishna, Michael~S. Bernstein, and Fei{-}Fei Li.
+\newblock Visual relationship detection with language priors.
+\newblock In {\em Computer Vision - {ECCV} 2016 - 14th European Conference,
+  Amsterdam, The Netherlands, October 11-14, 2016, Proceedings, Part {I}},
+  pages 852--869, 2016.
+
 \bibitem[\protect\citeauthoryear{Ramanathan \bgroup \em et al.\egroup
   }{2013}]{DBLP:conf/cvpr/RamanathanY013}
 Vignesh Ramanathan, Bangpeng Yao, and Fei{-}Fei Li.
 \newblock Social role discovery in human events.
 \newblock In {\em 2013 {IEEE} Conference on Computer Vision and Pattern
   Recognition, Portland, OR, USA, June 23-28, 2013}, pages 2475--2482, 2013.
+
+\bibitem[\protect\citeauthoryear{Sun \bgroup \em et al.\egroup
+  }{2017}]{DBLP:conf/cvpr/SunSF17}
+Qianru Sun, Bernt Schiele, and Mario Fritz.
+\newblock A domain based approach to social relation recognition.
+\newblock In {\em 2017 {IEEE} Conference on Computer Vision and Pattern
+  Recognition, {CVPR} 2017, Honolulu, HI, USA, July 21-26, 2017}, pages
+  435--444, 2017.
 
 \bibitem[\protect\citeauthoryear{Vinciarelli \bgroup \em et al.\egroup
   }{2009}]{DBLP:journals/ivc/VinciarelliPB09}
@@ -80,7 +96,15 @@ Zhouxia Wang, Tianshui Chen, Jimmy S.~J. Ren, Weihao Yu, Hui Cheng, and Liang
   Stockholm, Sweden.}, pages 1021--1028, 2018.
 
 \bibitem[\protect\citeauthoryear{Zhang \bgroup \em et al.\egroup
-  }{2015}]{DBLP:conf/iccv/ZhangLLT15}
+  }{2015a}]{DBLP:conf/cvpr/ZhangPTFB15}
+Ning Zhang, Manohar Paluri, Yaniv Taigman, Rob Fergus, and Lubomir~D. Bourdev.
+\newblock Beyond frontal faces: Improving person recognition using multiple
+  cues.
+\newblock In {\em {IEEE} Conference on Computer Vision and Pattern Recognition,
+  {CVPR} 2015, Boston, MA, USA, June 7-12, 2015}, pages 4804--4813, 2015.
+
+\bibitem[\protect\citeauthoryear{Zhang \bgroup \em et al.\egroup
+  }{2015b}]{DBLP:conf/iccv/ZhangLLT15}
 Zhanpeng Zhang, Ping Luo, Chen~Change Loy, and Xiaoou Tang.
 \newblock Learning social relation traits from face images.
 \newblock In {\em 2015 {IEEE} International Conference on Computer Vision,

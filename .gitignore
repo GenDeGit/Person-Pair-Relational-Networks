@@ -1,0 +1,10 @@
+论文/complie.sh
+论文/ijcai19-multiauthor.tex
+论文/*.aux
+论文/*.bbl
+论文/*.blg
+论文/*.doc
+论文/*.log
+论文/*.out
+论文/*.sty
+论文/*.bst
