@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.11.4)  19 FEB 2019 18:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.11.4)  20 FEB 2019 11:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -387,14 +387,14 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 85.
 \actualheight=\skip52
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 92.
 LaTeX Font Info:    Try loading font information for OMS+ptm on input line 94.
  (/home/liangjinrui/texlive/2018/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 94.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 95.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 105.
 
@@ -403,37 +403,37 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
 
 
 ] (./ijcai19.bbl
-Underfull \hbox (badness 2189) in paragraph at lines 5--10
+Underfull \hbox (badness 2189) in paragraph at lines 12--17
 []\OT1/ptm/m/n/10 Hamdi Dibek-li-oglu, Al-bert Ali
  []
 
 
-Underfull \hbox (badness 1087) in paragraph at lines 22--27
+Underfull \hbox (badness 1087) in paragraph at lines 29--34
 []\OT1/ptm/m/n/10 Li-Jia Li, David A. Shamma, Xi-ang-nan
  []
 
 
-Underfull \hbox (badness 1466) in paragraph at lines 22--27
+Underfull \hbox (badness 1466) in paragraph at lines 29--34
 \OT1/ptm/m/n/10 Kong, Sina Ja-far-pour, Roelof van Zwol, and Xu-an-
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 77--81
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 84--88
 []\OT1/ptm/m/n/10 Zhanpeng Zhang, Ping Luo,
  []
 
 
-Underfull \hbox (badness 1931) in paragraph at lines 77--81
+Underfull \hbox (badness 1931) in paragraph at lines 84--88
 \OT1/ptm/m/it/10 In-ter-na-tional Con-fer-ence on Com-puter Vi-sion, ICCV
  []
 
 
-Underfull \hbox (badness 1292) in paragraph at lines 77--81
+Underfull \hbox (badness 1292) in paragraph at lines 84--88
 \OT1/ptm/m/it/10 2015, San-ti-ago, Chile, De-cem-ber 7-13, 2015\OT1/ptm/m/n/10 
 , pages
  []
 
-[2])
+)
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 152.
  [3
 
@@ -447,22 +447,22 @@ Package rerunfilecheck Info: File `ijcai19.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 152.
  ) 
 Here is how much of TeX's memory you used:
- 7220 strings out of 492649
- 109257 string characters out of 6126320
+ 7222 strings out of 492649
+ 109312 string characters out of 6126320
  204112 words of memory out of 5000000
- 11003 multiletter control sequences out of 15000+600000
+ 11004 multiletter control sequences out of 15000+600000
  16325 words of font info for 31 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,5n,38p,1647b,414s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,5n,38p,1647b,412s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/liangjinrui/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc}</home
 /liangjinrui/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
 </home/liangjinrui/texlive/2018/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></h
 ome/liangjinrui/texlive/2018/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></home
 /liangjinrui/texlive/2018/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on ijcai19.pdf (3 pages, 65264 bytes).
+Output written on ijcai19.pdf (3 pages, 66456 bytes).
 PDF statistics:
- 137 PDF objects out of 1000 (max. 8388607)
- 126 compressed objects within 2 object streams
- 31 named destinations out of 1000 (max. 500000)
+ 140 PDF objects out of 1000 (max. 8388607)
+ 129 compressed objects within 2 object streams
+ 32 named destinations out of 1000 (max. 500000)
  129 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,8 +1,10 @@
-This is BibTeX, Version 0.99d (TeX Live 2018/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2018)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: ijcai19.aux
 The style file: named.bst
 Database file #1: ijcai19.bib
+A bad cross reference---entry "DBLP:conf/wacv/BarrCBF14"
+refers to entry "DBLP:conf/wacv/2014", which doesn't exist
 A bad cross reference---entry "DBLP:conf/ijcai/WangWG15"
 refers to entry "DBLP:conf/ijcai/2015", which doesn't exist
 A bad cross reference---entry "DBLP:conf/iccv/LiWZK17"
@@ -27,45 +29,46 @@ Warning--I didn't find a database entry for "DBLP:conf/iccv/2015"
 Warning--I didn't find a database entry for "DBLP:conf/cvpr/2013"
 Warning--I didn't find a database entry for "DBLP:conf/iccv/2013"
 Warning--I didn't find a database entry for "DBLP:conf/eccv/2010-4"
-You've used 10 entries,
+Warning--I didn't find a database entry for "DBLP:conf/wacv/2014"
+You've used 11 entries,
             2439 wiz_defined-function locations,
-            634 strings with 7700 characters,
-and the built_in function-call counts, 5677 in all, are:
-= -- 595
-> -- 220
-< -- 8
-+ -- 76
-- -- 76
-* -- 421
-:= -- 813
-add.period$ -- 30
-call.type$ -- 10
-change.case$ -- 78
-chr.to.int$ -- 10
-cite$ -- 10
-duplicate$ -- 248
-empty$ -- 434
-format.name$ -- 87
-if$ -- 1252
+            643 strings with 8048 characters,
+and the built_in function-call counts, 6246 in all, are:
+= -- 654
+> -- 243
+< -- 9
++ -- 84
+- -- 84
+* -- 462
+:= -- 893
+add.period$ -- 33
+call.type$ -- 11
+change.case$ -- 86
+chr.to.int$ -- 11
+cite$ -- 11
+duplicate$ -- 274
+empty$ -- 478
+format.name$ -- 96
+if$ -- 1379
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 10
-newline$ -- 53
-num.names$ -- 30
-pop$ -- 88
+missing$ -- 11
+newline$ -- 58
+num.names$ -- 33
+pop$ -- 98
 preamble$ -- 1
-purify$ -- 88
+purify$ -- 97
 quote$ -- 0
-skip$ -- 232
+skip$ -- 256
 stack$ -- 0
-substring$ -- 413
-swap$ -- 112
-text.length$ -- 8
+substring$ -- 450
+swap$ -- 124
+text.length$ -- 9
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 80
+type$ -- 88
 warning$ -- 0
-while$ -- 48
-width$ -- 13
-write$ -- 132
-(There were 8 error messages)
+while$ -- 53
+width$ -- 14
+write$ -- 145
+(There were 9 error messages)

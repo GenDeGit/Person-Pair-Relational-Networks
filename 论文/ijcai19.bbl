@@ -1,5 +1,12 @@
 \begin{thebibliography}{}
 
+\bibitem[\protect\citeauthoryear{Barr \bgroup \em et al.\egroup
+  }{2014}]{DBLP:conf/wacv/BarrCBF14}
+Jeremiah~R. Barr, Leonardo~A. Cament, Kevin~W. Bowyer, and Patrick~J. Flynn.
+\newblock Active clustering with ensembles for social structure extraction.
+\newblock In {\em {IEEE} Winter Conference on Applications of Computer Vision,
+  Steamboat Springs, CO, USA, March 24-26, 2014}, pages 969--976, 2014.
+
 \bibitem[\protect\citeauthoryear{Dibeklioglu \bgroup \em et al.\egroup
   }{2013}]{DBLP:conf/iccv/DibekliogluSG13}
 Hamdi Dibeklioglu, Albert~Ali Salah, and Theo Gevers.
