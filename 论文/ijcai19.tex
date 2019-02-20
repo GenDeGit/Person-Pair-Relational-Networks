@@ -93,16 +93,18 @@ Social relationships understanding is to infer the relations among people from i
 \end{abstract}
 
 \section{Introduction}
-Social relationships are closely related to our daily life \cite{DBLP:conf/wacv/BarrCBF14}. After understanding the social relationship between the person pair, we can easily explain their behavior. For machines, only when they fully understand the social relationships, can they further understand and infer the human behavior in our social life, so as to make a better response.
+Social relationships are closely related to our daily life \cite{DBLP:conf/wacv/BarrCBF14}. After understanding the social relationship between the person pair, we can easily explain their behavior. For machines, only when they fully understand the social relationships, can they further understand and infer the human behavior in our social life, so as to make a better response. In addition, we often leave traces that capture social relationships in many medias and we not only want the machines to be proficient at their task, but also enable them to blend in and
+act appropriately in different situations \cite{DBLP:conf/cvpr/SunSF17}. In short, social relationship detection task is very significant in many ways. In our work, we aim to address the social relationship detection task for every picture where each picture represents a scene. 
 
-This part will be written by {\bf liangjinrui} . This part will consist of the following sections:
-\begin{itemize}
-	\item The significance of social relation understanding
-	\item {\bf [Example Figure]}
-	\item Analyze the shortcomings of the current model and introduce our model(based ILP)
-	\item Challenges
-	\item Contributions
-\end{itemize}
+However, to solve the social relationship detection task is not so simple. For a giving picture, detecting the social relationships of all the person pair is a difficult task. The models need to be adapted to different scenes and context information to make right judgments.  \cite{DBLP:conf/cvpr/SunSF17} use the information of head region, body region and human attributes to predict the person-pair's social relationship separately. \cite{DBLP:conf/iccv/LiWZK17} make use of the pair of people in question and region proposals and allocate attention to each region to detect the social relationship of each person pair. \cite{DBLP:conf/ijcai/WangCRYCL18} takes advantage of the message propagation between person pair social relationship and the object  semantic regions to solve the problem. The biggest problem of these models is that they all only detect one relationship per step which will cause that different social relationships in the same scene cannot interact with each other. Social relationships in the same scene are strongly linked but the previous models have ignored this important information.
+
+[Figure 1]
+
+As one example in PIPA(Figure 1) where the picture denotes a scene. There are "father-child" relationship, "mother-child" relationship, "grandpa-grandchild" relationship and "grandma-grandchild" relationship in the scene. We can easily see that these relationships are related and belong to the "Attachment" relationship. In other words, we can easily use the interaction of different relationships in the same scene to detect each social relationship. Therefore we address the issue with focusing more on the interaction between every social relationships in one scene to improve the detection performance.
+
+However, the biggest issue of the task is that it is not as simple as people directly judging the result. We need to design the mechanism of the interaction between social relationships and effectively model the mechanism. The other issue is how to use less effective information to model the interaction machanism and get the better result.
+
+To address this problem, we propose a novel end-to-end trainable Person-Pair Relation Network (PRN).
 
 \section{Related Work}
 
