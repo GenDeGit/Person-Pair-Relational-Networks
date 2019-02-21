@@ -140,6 +140,19 @@ This part will be written by {\bf liangjinrui} and {\bf chenhaicheng}.
 \subsection{Imposing Rules}
 \subsection{Integrating by Integer Linear Programming}
 
+\subsection{Optimization}
+
+Given the predicted score $\mathbf{s}^{I,k} \in R^{|\mathcal{C}|}$ for the $k$-th person pair in image $I$, we use {\it softmax} to get its corresponding probability $\mathbf{p}^{I,k} \in R^{|\mathcal{C}|}$
+\begin{equation}
+  \label{eq:prob_eq}
+  p_i^{I,k} = \frac{\exp{s_i^{I,k}}}{\sum_{j=1}^{|\mathcal{C}|}{\exp{s_j^{I,k}}}}, i=1,2,\dots,|\mathcal{C}|
+\end{equation}
+where $\mathcal{C}$ donates the classes set of social relationship and $|\mathcal{C}|$ is its size. The loss function is expressed as
+\begin{equation}
+  \label{eq:loss_eq}
+  \mathcal{L} = - \frac{1}{\sum_{I \in \mathcal{I}}\text{N}(I)} \sum_{I \in \mathcal{I}} \sum_{k=1}^{\text{N}(I)} \sum_{i=1}^{|\mathcal{C}|} \text{L}(y_{i}^{I,k}, p_{i}^{I,k})
+\end{equation}
+where $\text{N}(I)$ returns the number of person pair in image $I$, $\text{L}(\cdot)$ is the cross entropy loss function, $\mathcal{I}$ is the image set.
 
 \section{Experiments}
 
