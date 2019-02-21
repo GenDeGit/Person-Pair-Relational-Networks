@@ -99,9 +99,19 @@ act appropriately in different situations \cite{DBLP:conf/cvpr/SunSF17}. In shor
 
 However, to solve the social relationship detection task is not so simple. For a giving picture, detecting the social relationships of all the person pair is a difficult task. The models need to be adapted to different scenes and context information to make right judgments.  \cite{DBLP:conf/cvpr/SunSF17} use the information of head region, body region and human attributes to predict the person-pair's social relationship separately. \cite{DBLP:conf/iccv/LiWZK17} make use of the pair of people in question and region proposals and allocate attention to each region to detect the social relationship of each person pair. \cite{DBLP:conf/ijcai/WangCRYCL18} takes advantage of the message propagation between person pair social relationship and the object  semantic regions to solve the problem. The biggest problem of these models is that they all only detect one relationship per step which will cause that different social relationships in the same scene cannot interact with each other. Social relationships in the same scene are strongly linked but the previous models have ignored this important information.
 
-[Figure 1]
+\vspace*{-3mm}
+\begin{figure}[htpb]
+	\centering
+	%	\includegraphics[width=0.48 \textwidth, trim=10 10 10 80,clip]{./pic/example_new.pdf}
+	\includegraphics[width=0.48 \textwidth,clip]{./pic/example.png}
+	%\hspace{0.02\textwidth}
+	%\vspace*{-0.08cm}
+	\caption{An example image from PIPA dataset. There are 4 person-pair social relationships in the picture: friends, friends, friends and band members.}
+	\vspace*{-3.5mm}
+	\label{example}
+\end{figure}
 
-As one example in PIPA(Figure 1) where the picture denotes a scene. There are "father-child" relationship, "mother-child" relationship, "grandpa-grandchild" relationship and "grandma-grandchild" relationship in the scene. We can easily see that these relationships are related and belong to the "Attachment" relationship. In other words, we can easily use the interaction of different relationships in the same scene to detect each social relationship. Therefore we address the issue with focusing more on the interaction between every social relationships in one scene to improve the detection performance.
+As one example in PIPA(Figure \ref{example}) where the picture denotes a scene, there are 3  "friends" relationships and 1 "band members" relationship in the scene. If we know only that two of these relationships are "friends, "we can infer that it is most likely a group of friends, and thus we infer that the unknown relationship is "friends" or related to "friends". In other words, we can easily use the interaction of different relationships in the same scene to detect each social relationship. Therefore we address the issue with focusing more on the interaction between every social relationships in one scene to improve the social relationship detection performance.
 
 However, the biggest issue of the task is that it is not as simple as people directly judging the result. We need to design the mechanism of the interaction between social relationships and effectively model the mechanism. The other issue is how to use less effective information to model the interaction machanism and get the better result.
 
