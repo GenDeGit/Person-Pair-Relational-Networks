@@ -29,6 +29,7 @@
 % the following package is optional:
 %\usepackage{latexsym} 
 
+\usepackage{bm}
 \newcommand{\PRN}{{\sf PRN}}
 \newcommand{\etal}{{\it et al.}}
 
@@ -144,7 +145,7 @@ Graph inference is a kind of form of message passing and Conditional Random Fiel
 \begin{figure*}[htpb]
 	\centering
 	%	\includegraphics[width=0.48 \textwidth, trim=10 10 10 80,clip]{./pic/example_new.pdf}
-	\includegraphics[width=0.96 \textwidth,clip]{./pic/model_1.png}
+	\includegraphics[width=0.96 \textwidth,clip]{./pic/model_2.png}
 	%\hspace{0.02\textwidth}
 	%\vspace*{-0.08cm}
 	\caption{An illustration of our \PRN . The model first extracts the features of each person and person pairs in the Feature Extraction Module. $P_i$ denotes the $i$th person and $P_{uij}$ denotes the union region of $i$th person and $j$th person. $b_i$ denotes the position of the $i$th person. In the Message Pooling Module, a message pooling function computes relationship messages that are passed to the node GRU in the next iteration from the hidden states. The $\oplus$ symbol denotes a learnt weighted sum. Then in the Message Passing Module, we iteratively updates the hidden states of the GRUs. We use the hidden states of the GRUs at the last iteration step, to predict the social relationships in the scene.}
@@ -153,11 +154,11 @@ Graph inference is a kind of form of message passing and Conditional Random Fiel
 \end{figure*}
 
 
-\section{PRN model}
+\section{\PRN \ Model}
 
 [Introduce the total model]
 
-\subsection{overview} \label{section:ov}
+\subsection{Overview of  \PRN \ Model} \label{section:ov}
 In this section, we introduce the proposed person-pair relational network for social relationship understanding. We fomulate the relationshipes of an image as a social graph, and followed\cite{DBLP:conf/ijcai/WangCRYCL18}
 to extract various features. Then, These features are used to initialize the nodes on the social graph. Person pair relation network employs Gated Recurrent Unit\cite{DBLP:conf/ssst/ChoMBB14} to explore the interaction of relationships with each other, and we employ the attention mechanism to adaptively exploit the most relevant nodes. It integrates multiple
 component to learn the representations of relationshipes between peoples in an image. 
@@ -166,9 +167,23 @@ component to learn the representations of relationshipes between peoples in an i
 \subsection{Feature Extraction Module} \label{section:vs}
 
 Given an image \textbf{I} and the bounding box of peoples, we first crop three patches for each person pair, where the first two cover each person, $\mathbf{p_1}$ and $\mathbf{p_2}$, and one for union region, $\mathbf{p_u}$, that cover the both people and maintains the basic informantion for recognition. These patches are resized to $224\times224$ pixels and fed into three CNNs, These feature vectors from the last convolutional layer are flattened and concatenated. $\mathbf{p_1}$ and $\mathbf{p_2}$ share the same weights. In addition, the geometry feature of bounding box is complementary to the visual appearance, and the $\mathbf{no relation}$ reflect the spatial relation between two people which is not easy to learn only from visual feature. we denote the geometry feature of bounding box i as $b_i^{pos}$ = ${x_i^{min}, y_i^{min},x_i^{max},y_i^{max}}$  $\in$ $\mathbf{R}^5$, where all the parameters are relative values. These features also concatenated with the CNN features for $p_1,p_2$ and $p_u$ to form a single vector. Finally, both of them are fed into a fully connected layer to produce a 4096-dimension feature vector $v_h$. 
-\subsection{Reasoning of Recurrent Neural Network} \label{section:RRNN}
+\subsection{Message Passing Module} \label{section:RRNN}
+In this module, we use the Recurrent Neural Networks(RNNs) to finish the inference of the social relationship detection task. In contrast to Zheng \etal \ \cite{DBLP:conf/iccv/0001JRVSDHT15}, our model use a generic RNN module to compute the hidden states. In addition, we select the best cell Gated Recurrent Units \cite{DBLP:conf/ssst/2014} for RNNs. We use the hidden states of the $t$th step to denote the social relationships information in the scene. So the social relationships information will be updated step by step as the GRU-based RNN going. This module can be formulated as follows:
 
-\subsection{Message pooling} \label{section:mp}
+%\vspace{-0.5mm}
+\begin{equation}
+\begin{split}
+\bm{r}_t &=  \sigma(\bm{W}_{r}[\bm{h}_{t-1}, \bm{x}_t]), \\
+\bm{z}_t &=  \sigma(\bm{W}_{z}[\bm{h}_{t-1}, \bm{x}_t]), \\
+\hat{\bm{h}_t} &= tanh(\bm{W}[\bm{r}_t \odot \bm{h}_{t-1}, \bm{x}_{t}])\\
+\bm{h}_t &= (1 - \bm{z}_t) \odot \bm{h}_{t - 1} + \bm{z}_t \odot \hat{\bm{h}_t} \\
+\bm{y}_t &= \sigma (\bm{W}_o\bm{h}_t)
+\end{split}
+\end{equation}
+
+where $\sigma$ and $tanh$ are the logistic sigmoid and hyperbolic tangent functions. In addition, $\odot$ symbol denotes the element-wise multiplication operation. $\bm{r}_t$ denotes the reset gate in $t$ step and $\bm{z}_t$ denotes the update gate at $t$ step. $\bm{W}_r$ , $\bm{W}_Z$ and $\bm{W}_o$ denote weights of reset gate, update gate and output gate of the GRU. $\bm{W}_r$, $\bm{W}_z$ and $\bm{W}$ are trainable parameters. $\bm{h}_t$ denotes the hidden state of GRU at $t$ step and $\bm{x}_t$ denotes the input of GRU at $t$ step. Specially, $\bm{x}_0$ comes from the Feature Extraction Module and the hidden state will be put into the Message Pooling Module. Then the output of the Message Pooling Module will be the input of the next GRU. In this way, $\bm{x}_t$ comes from the previous Message Passing Module and the hidden state of the GRU will pass step by step which denotes the information of social relationship in the scene. At last, we use the last hidden state of the GRU to represent the social relationships and output the results.
+
+\subsection{Message Pooling Module} \label{section:mp}
 
 Formally, given the current GRU hidden states of nodes $h_i$, we takes the messages from other nodes as $m_i$ and $h_{j \to i}$ as the other node. $m_{i}$ is computed by function of its hidden state $h_i$.To be more specific, $m_i$ are computed by the following message pooling functions:
 
