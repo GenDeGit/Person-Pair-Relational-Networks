@@ -154,11 +154,9 @@ Graph inference is a kind of form of message passing and Conditional Random Fiel
 \end{figure*}
 
 
-\section{\PRN \ Model}
+\section{PRN \ Model}
 
-[Introduce the total model]
-
-\subsection{Overview of  \PRN \ Model} \label{section:ov}
+\subsection{overview} \label{section:ov}
 In this section, we introduce the proposed person-pair relational network for social relationship understanding. We fomulate the relationshipes of an image as a social graph, and followed\cite{DBLP:conf/ijcai/WangCRYCL18}
 to extract various features. Then, These features are used to initialize the nodes on the social graph. Person pair relation network employs Gated Recurrent Unit\cite{DBLP:conf/ssst/ChoMBB14} to explore the interaction of relationships with each other, and we employ the attention mechanism to adaptively exploit the most relevant nodes. It integrates multiple
 component to learn the representations of relationshipes between peoples in an image. 
@@ -166,7 +164,9 @@ component to learn the representations of relationshipes between peoples in an i
 
 \subsection{Feature Extraction Module} \label{section:vs}
 
-Given an image \textbf{I} and the bounding box of peoples, we first crop three patches for each person pair, where the first two cover each person, $\mathbf{p_1}$ and $\mathbf{p_2}$, and one for union region, $\mathbf{p_u}$, that cover the both people and maintains the basic informantion for recognition. These patches are resized to $224\times224$ pixels and fed into three CNNs, These feature vectors from the last convolutional layer are flattened and concatenated. $\mathbf{p_1}$ and $\mathbf{p_2}$ share the same weights. In addition, the geometry feature of bounding box is complementary to the visual appearance, and the $\mathbf{no relation}$ reflect the spatial relation between two people which is not easy to learn only from visual feature. we denote the geometry feature of bounding box i as $b_i^{pos}$ = ${x_i^{min}, y_i^{min},x_i^{max},y_i^{max}}$  $\in$ $\mathbf{R}^5$, where all the parameters are relative values. These features also concatenated with the CNN features for $p_1,p_2$ and $p_u$ to form a single vector. Finally, both of them are fed into a fully connected layer to produce a 4096-dimension feature vector $v_h$. 
+Given an image \textbf{I} and the bounding box of peoples, we first crop three patches for each person pair, where the first two cover each person, $\mathbf{p_1}$ and $\mathbf{p_2}$, and one for union region, $\mathbf{p_u}$, that cover the both people and maintains the basic informantion for recognition. These patches are resized to $224\times224$ pixels and fed into three CNNs, These feature vectors from the last convolutional layer are flattened and concatenated. $\mathbf{p_1}$ and $\mathbf{p_2}$ share the same weights.
+In addition, geometry feature of bounding box is complementary to the visual appearance, as the relation $\emph{No Relation}$, which is not easy to learn only from visual feature. We denote the geometry feature of bounding box i as $b_i^{pos}$ = $\{x_i^{min}, y_i^{min},x_i^{max},y_i^{max},area_i\}$  $\in$ $\mathbf{R}^5$, where all the parameters are relative values. These features also concatenated with the CNN features for $p_1,p_2$ and $p_u$ to form a single vector. Finally, both of them are fed into a fully connected layer to produce a 4096-dimension feature vector $v_h$. 
+
 \subsection{Message Passing Module} \label{section:RRNN}
 In this module, we use the Recurrent Neural Networks(RNNs) to finish the inference of the social relationship detection task. In contrast to Zheng \etal \ \cite{DBLP:conf/iccv/0001JRVSDHT15}, our model use a generic RNN module to compute the hidden states. In addition, we select the best cell Gated Recurrent Units \cite{DBLP:conf/ssst/2014} for RNNs. We use the hidden states of the $t$th step to denote the social relationships information in the scene. So the social relationships information will be updated step by step as the GRU-based RNN going. This module can be formulated as follows:
 
@@ -183,17 +183,16 @@ In this module, we use the Recurrent Neural Networks(RNNs) to finish the inferen
 
 where $\sigma$ and $tanh$ are the logistic sigmoid and hyperbolic tangent functions. In addition, $\odot$ symbol denotes the element-wise multiplication operation. $\bm{r}_t$ denotes the reset gate in $t$ step and $\bm{z}_t$ denotes the update gate at $t$ step. $\bm{W}_r$ , $\bm{W}_Z$ and $\bm{W}_o$ denote weights of reset gate, update gate and output gate of the GRU. $\bm{W}_r$, $\bm{W}_z$ and $\bm{W}$ are trainable parameters. $\bm{h}_t$ denotes the hidden state of GRU at $t$ step and $\bm{x}_t$ denotes the input of GRU at $t$ step. Specially, $\bm{x}_0$ comes from the Feature Extraction Module and the hidden state will be put into the Message Pooling Module. Then the output of the Message Pooling Module will be the input of the next GRU. In this way, $\bm{x}_t$ comes from the previous Message Passing Module and the hidden state of the GRU will pass step by step which denotes the information of social relationship in the scene. At last, we use the last hidden state of the GRU to represent the social relationships and output the results.
 
-\subsection{Message Pooling Module} \label{section:mp}
+\subsection{Message pooling Module} \label{section:mp}
 
-Formally, given the current GRU hidden states of nodes $h_i$, we takes the messages from other nodes as $m_i$ and $h_{j \to i}$ as the other node. $m_{i}$ is computed by function of its hidden state $h_i$.To be more specific, $m_i$ are computed by the following message pooling functions:
+Sec \ref{section:vs} provides a way to solve reasoning problem using RNNs. As each GRU receives multiple incoming messages, we need an aggregation function that merge information from all messages into a meaningful representation. Intuitively, the methods of standard pooling  can do this, such as average pooling and max-pooling. But, it will be more effective to exploit various contextual cues and only preserve the appropriate parts when understanding social graph of an image with different. relationship. So, we utilized a message pooling function that computes the weights factors for each incoming message and aggregate the the messages using a weightes sum. 
+
+Formally, given the current GRU hidden states of nodes $h_i$, we takes the messages from other nodes as $m_{i,j \to i}$, and $h_{j \to i}$ as the hidden state of connected node. $m_{i,j \to i}$ is computed by function of its hidden state $h_i$.To be more specific, $m_{i, j \to i}$ are computed by the following message pooling functions:
 
 \begin{equation}
-	m_{i,j \to i} = \sum_{j} \sigma{(v_1^T[h_i,h_{j \to i}])h_{j \to i}}	
+	m_{i,j \to i} = \sum_{j} \sigma{(w^T[h_i,h_{j \to i}])h_{j \to i}}	
 \end{equation}
-
-we formulate the 
-
-\ref{section:vs} provides 
+where [.] representes a the operation in the concatnation of vectors. and $\sigma$ denoted a sigmoid function. w is the parameter to be learn. 
 
 \subsection{Optimization}
 
@@ -247,17 +246,6 @@ In this subsection, we made an analysis on PISC and PIPA-relation. Here we only 
 
 \subsection{Comparisons with State-of-the-Art Methods}
 
-We compare our proposed model with existing state-of-the-art methods on both PISC and PIPA-Relation datasets.Formally, the compared methods are as followed:
-\subsubsection{Performance on the PISC dataset}
-{\bf UnionCNN}  Following \cite{DBLP:conf/eccv/LuKBL16}, it generates a single CNN model to predicate relations. In this task, we also feeds the union region of person pair to s single CNN for classification.\\
-{\bf Pair CNN}\cite{DBLP:conf/iccv/LiWZK17} consists of two equivalent CNNs with shared weights to extracted features for image for two individuals.\\
-{\bf Pair CNN + BBox + Union}\cite{DBLP:conf/iccv/LiWZK17} incorporates spatial location information of two bounding box that based the previous pair CNN and Union CNN.\\
-{\bf Dual-glance}\cite{DBLP:conf/iccv/LiWZK17} implements coarse and fine prediction which includes three and six relationships. Dual-glance employing pair CNN + BBox + BBox + Union and utilized surrounding region proposal to refine the prediction.\\
-{\bf GRM}\cite{DBLP:conf/ijcai/WangCRYCL18} propse a graph reasoning model that unifies the frequence of co-concurrences of each relationship-object pair to facilitate social relation.
-Similar to the model of GRM, we also adopt the per-class recall and mean average precision(mMP) to evaluate our model. The experiments data are reported in Table 1. First, both Pair CNN + BBox + Union, Pair CNN + BBox + Global, Dual-glance are incur extra Faster-RCNN\cite{DBLP:conf/nips/RenHGS15} to extract the local contextual cues(object proposal). GRM utilized the object proposal to construct a semantic-aware  knowledge graph to reason about the social relationship. It is notable that both of them incur extra detection annotations that contains noisies.
-
-\subsection{Experiment Results}
-
 \begin{table*}[htpb]
   \centering
   \caption{Recall-per-class and mean average precision (mAP) evaluating our PRN model and previous methods on PISC (in \%).}
@@ -292,32 +280,30 @@ Similar to the model of GRM, we also adopt the per-class recall and mean average
     Dual-Glance \cite{DBLP:conf/iccv/LiWZK17} & 59.6 \\
     GRM \cite{DBLP:conf/ijcai/WangCRYCL18} & 62.3 \\
     \hline
-    Ours & \\
+    Ours & 64.7\\
     \hline
   \end{tabular}
 \end{table}
 
+We compare our proposed model with existing state-of-the-art methods on both PISC and PIPA-Relation datasets.Formally, the compared methods are as followed:
+
+\subsubsection{Performance on the PISC dataset}
+
+{\bf UnionCNN}  Following \cite{DBLP:conf/eccv/LuKBL16}, it generates a single CNN model to predicate relations. In this task, we also feeds the union region of person pair to s single CNN for classification.\\
+{\bf Pair CNN}\cite{DBLP:conf/iccv/LiWZK17} consists of two equivalent CNNs with shared weights to extracted features for image for two individuals.\\
+{\bf Pair CNN + BBox + Union}\cite{DBLP:conf/iccv/LiWZK17} incorporates spatial location information of two bounding box that based the previous pair CNN and Union CNN.\\
+{\bf Dual-glance}\cite{DBLP:conf/iccv/LiWZK17} implements coarse and fine prediction which includes three and six relationships. Dual-glance employing pair CNN + BBox + BBox + Union and utilized surrounding region proposal to refine the prediction.\\
+{\bf GRM}\cite{DBLP:conf/ijcai/WangCRYCL18} propse a graph reasoning model that unifies the frequence of co-concurrences of each relationship-object pair to facilitate social relation.
+
+Similar to the model of GRM, we also adopt the per-class recall and mean average precision(mMP) to evaluate our model. The experiments data are reported in Table 1. First, both Pair CNN + BBox + Union, Pair CNN + BBox + Global, Dual-glance are incur extra Faster-RCNN\cite{DBLP:conf/nips/RenHGS15} to extract the local contextual cues(object proposal). GRM utilized the object proposal to construct a semantic-aware  knowledge graph for reason about the social relationship. It is notable that both of them incur extra detection annotations that contains noisies.Specifically, our model achieves an accuracy of 75.0\% and mAP of 82.1\% for the coarse-level recognition. the model also takes an accuracy of 65.6\% and mAP of 69.7\% for the fine-level dataset, our model beating previous best model in the fine-level recognition ,but slightly lower on coarse-level than the best model before.
+
 \subsubsection{Performance on the PIPA-Relation dataset}
-On this dataset, we also compare our proposed model with the existing Two stream CNN\cite{DBLP:conf/cvpr/SunSF17},Dual-glance\cite{DBLP:conf/iccv/LiWZK17} and GRM\cite{DBLP:conf/ijcai/WangCRYCL18}.As the current dataset of PIPA-relation, Dual-glance and GRM achieves the best performance. Specifically, we directly reprint the experimental of serveral baselines from the literature. The Result are presented in Table 2. Notably, our PRN sigmificantly outperforms previous methods. Specifically, it is comparabel of our proposed model with previous model, and beating the best of them 2.4\%.  
+
+On this dataset, we also compare our proposed model with the existing methods,i.e, Two stream CNN\cite{DBLP:conf/cvpr/SunSF17},Dual-glance\cite{DBLP:conf/iccv/LiWZK17} and GRM\cite{DBLP:conf/ijcai/WangCRYCL18} that achieves the best performance before. Specifically, we directly reprint the experimental of serveral baselines from the literature. The result are presented in Table 2. Notably, our PRN significantly outperforms previous methods. Still, our model outperforms all the baselines in PIPA-relation, and beating the best of them 2.4\%.  
+
 \subsection{Analysis on Experimental result}
 
-In this section, we first present the comparison result  of message passing mechanism and analsis the reasons behind, and the result present in Table 3.
-Then, we conduct a conditional experiment to investigate the effectiveness of 
-the factor of region contexuals and the interaction between person-pair.
-\subsubsection{Significance of message passing}
-
-In our framework, the core component is the introduction of message passing mechanism, and one of the key component is the message pooling functions that use learnt weights sum to aggregate hidden state of other relation nodes into message. To futher inverstigate the improvement of our approach on recognizing social relationships, we evaluate variants of our model
-with standard pooling methods. The first is to use average-pooling (avg. pool) instead of the learnt weighted sum to
-aggregate the hidden states. The second is similar to the first
-one, but uses max-pooling (max pool).
-
-\subsubsection{Analysis of contextual relationships and contexual regions}
-
-First, our model is to process the cue of contexual relationships without contextual region that incured in Dual-glance and GRM by extra detecion annotation. As preceding mentioned, the scene of an image is stable and the sementic relationship of all the person pair tends to be similar.
- \cite{DBLP:conf/iccv/LiWZK17} trained a RCNN with attention machanisms to exploit different contextual cues according different pairs of people. we also conduct a attention machanisms as same as Dual-glance, but the performance do not improved as reported in Table 3. For example, if the object of laptop is useful to classifier the relationship as professional, but  the detection model does not always achieve this. One possible reason is that the contexual regions cues is coverd by contexual relationships cues.
-
-
-\begin{table}[htb]
+\begin{table}[htb] 
 	\vspace*{-7.5pt}
 	\centering
 	\caption{The mMap and accuracy result of RCNN, our model and our model with contexual region that implements in the same way as dual-glance}
@@ -325,31 +311,57 @@ First, our model is to process the cue of contexual relationships without contex
 	\scalebox{1}{
 		\begin{tabular}{c|c|c|c|c}
 			\toprule
-			\multirow{2}{*}{Multi-Row} &
-			\multicolumn{2}{c|}{Multi-Column} &
-			\multicolumn{2}{|c}{Multi-Row}  \\
- 				 & column-1 & column-2 & 3 & 4  \\
-			\hline
+			\multirow{2}{*}{Methods} &
+			\multicolumn{2}{c|}{PISC coarse} &
+			\multicolumn{2}{|c}{PISC fine}  \\
+ 				 & accuracy & mAP & accuracy & mAP  \\
+			\midrule
 			RCNN & - & 63.5 & - & 48.4 \\
-			\hline
-			Ours & label-2 & label-3 & label-4 & label-5 \\
-			\hline
-			Ours+region & label-2 & label-3 & label-4 & label-5 \\
+			\midrule
+			Ours(max) & 10.2 & 10.2 & 10.2 & 10.2 \\
+			\midrule
+			Ours(average) & 10.2 & 10.2 & 10.2 & 10.2 \\
+			\midrule
+			Ours(atten) & 10.2 & 10.2 & 10.2 & 10.2 \\
+			\midrule
+			Ours(atten)+region & 10.2 & 10.2 & 10.2 & 10.2 \\
+			\midrule
 		\end{tabular}
 	}
 \end{table}
 
-\subsection{Ablation Study}
-\subsection{Case Study}
+In this section, we first present the comparison result  of message passing mechanism and analsis the reasons behind, and the result present in Table 3.
+Then, we conduct a conditional experiment to investigate the effectiveness of 
+the factor of region contexuals and the interaction between person-pair.
 
-\begin{figure*}[t]
+\subsubsection{Significance of message passing}
+
+In our framework, the core component is the introduction of message passing mechanism, and one of the key component is the message pooling functions that use learnt weights sum to aggregate hidden state of other relation nodes into message. To futher inverstigate the improvement of our approach on recognizing social relationships, we evaluate variants of our model
+with standard pooling methods. The first is to use average-pooling (avg. pool) instead of the learnt weighted sum to
+aggregate the hidden states. The second is similar to the first
+one, but uses max-pooling (max pool).
+
+\begin{figure*}[ht]
   \centering
   \includegraphics[width=0.9\linewidth]{pic/case_study_pisc_fine_union.png}
   \caption{Comparison of social relation graphs from different sources: (a) PISC fine, (b) our PRN and (c) GRM. People with boxes of various colors on the original image correspond to the same color node on right of the image. An edge linked to two nodes represents the social relationships between them and its meaning can be found in the right legend.}
   \label{fig:case_study}
 \end{figure*}
 
-Four examples in Figure \ref{fig:case_study} are shown to illustrate the capacity of our PRN to infer social relationshps. We compare two predicted social relationships, one from our PRN and the another from GRM \cite{DBLP:conf/ijcai/WangCRYCL18}. We find that compared to the social relation graph in (c), the graph in (b) in all these examples are both much similar to the graph in (a), which means that our PRN performs better than GRM. Additionally, the edges in (a) are almost consistent, meaning that the social relationships in a still image are stable. Considering the first example, the true social relationship between the person with an orange box and the anther with an green one is No Relation, which can be correctly predicted by our PRN while wrongly predicted as Couple by GRM.
+\subsubsection{Analysis of contextual information}
+
+First, our model is to process the cue of contexual of relationships without contextual region that incured in Dual-glance and GRM by extra detecion annotation. 
+From the contexual region point of view, the effect of contexual region is provide the information of scene to constraint the vector of the relationship and the information of scene is single. So, contexual regions is limited for the images with multi-class social relationship. But, the information of contexual relationships is different, and it is more appropriate for the fine relationships.
+For example, if the object of laptop is useful to classifier the relationship as professional that is not contribute to the relationship of friend.
+As tabel 3 reported, the model of RCNN is the lowest, and
+ \cite{DBLP:conf/iccv/LiWZK17} trained a model with attention machanisms to exploit different contextual cues according different pairs of people. we also conduct a attention machanisms as same as Dual-glance, but the performance do not improved as reported in Table 3. 
+One possible reason is that the contexual regions cues is coverd by contexual information of relationships cues, and the result of experiments proved the analysis before. 
+
+%\subsection{Ablation Study}
+
+\subsection{Case Study}
+
+Four examples in Figure \ref{fig:case_study} are shown to illustrate the capacity of our PRN to infer social relationshps. We compare two predicted social relationships, one from our PRN and the another from GRM \cite{DBLP:conf/ijcai/WangCRYCL18}. We find that compared to the social relation graph in (c), the graph in (b) in all these examples are both much similar to the graph in (a), which means that our PRN performs better than GRM. Additionally, the edges in (a) are almost consistent, meaning that the social relationships in a still image are stable. Considering the first example, the true social relationship between the person with an orange box and the another with an green one is No Relation, which can be correctly predicted by our PRN while wrongly predicted as Couple by GRM.
 
 \section{Conclusion}
 This part will be written by {\bf liangjinrui}.
