@@ -14,7 +14,7 @@
 \usepackage{times}
 \usepackage{soul}
 \usepackage{url}
-\usepackage[hidelinks]{hyperref}
+%\usepackage[hidelinks]{hyperref}
 \usepackage[utf8]{inputenc}
 \usepackage[small]{caption}
 \usepackage{graphicx}
@@ -28,6 +28,9 @@
 \urlstyle{same}
 % the following package is optional:
 %\usepackage{latexsym} 
+
+\newcommand{\PRN}{{\sf PRN}}
+\newcommand{\etal}{{\it et al.}}
 
 % Following comment is from ijcai97-submit.tex:
 % The preparation of these files was supported by Schlumberger Palo Alto
@@ -51,7 +54,7 @@
 
 % \title{Social Relationship Detection using Rules}
 
-\title{Understanding Social Relationship with Person-Pair Relations}
+\title{Understanding Social Relationship with Person-pair Relations}
 
 % Single author syntax
 \author{
@@ -89,7 +92,7 @@ fourth@example.com
 \begin{abstract}
 % Social relationships play a very important role in social network. Social relationship understanding has attracted increasing attention, typically, which can help to understand the behavior of humen in our daily life. Previous social relationship understanding models focused too much on relationships between the same pair and ignore the interplay of different relationships in the same scene.  We found that the interaction between the relationships in the same scene plays an important role in the understanding of social relations and we can make meanful use of rules during inference. This paper proposes a novel model named {\it SRDR} which incorporates rules seamlessly into the deep learning model named {\it SR}  to solve the social relationship understanding problem. It formulates inference as an integer linear programming (ILP) problem, with the objective function generated from {\it SR} and the constraints translated from rules. By incorporating rules, our approach can greatly reduce the solution space and significantly improve the inference accuracy of social relationship understanding models. Experimental results on two classic data sets show that our approach significantly outperforms state-of-the-art  models in social relationship understanding, which justifies the significance of incorporating rules seamlessly into the deep learning model in social relationship understanding task.
 
-Social relationships understanding is to infer the social relations among people from images and videos, which has attracted increasing attention in computer vison recently. A great progress has been made since the rise of deep learning. However, they mostly focuses on the facial attributes or contextual object cues without taking into account the interaction among person pairs. Motivated by scene graph generation, we carefully analyzed the datasets and found the social relations in a still image always have high semantic relevance. For instance, if two person pair in an image are {\it Friends}, then the third one is always friends or at least other intimate relations but not {\it No Relation}. Therefore, to capture this interaction cues, we propose a novel end-to-end trainable Person-Pair Relation Network (PRN) using standard RNNs, a graph inference network that learns iteratively to improve its predictions via message passing among person pair nodes. Extensive experiments on PISC and PIPA-Relation show the superiority of our method over previous methods. 
+Social relationships understanding is to infer the social relations among people from images and videos, which has attracted increasing attention in computer vison recently. A great progress has been made since the rise of deep learning. However, they mostly focuses on the facial attributes or contextual object cues without taking into account the interaction among person pairs. Motivated by scene graph generation, we carefully analyzed the datasets and found the social relations in a still image always have high semantic relevance. For instance, if two person pair in an image are {\it Friends}, then the third one is always friends or at least other intimate relations but not {\it No Relation}. Therefore, to capture this interaction cues, we propose a novel end-to-end trainable Person-Pair Relation Network (\PRN) using standard RNNs, a graph inference network that learns iteratively to improve its predictions via message passing among person pair nodes. Extensive experiments on PISC and PIPA-Relation show the superiority of our method over previous methods. 
 
 \end{abstract}
 
@@ -99,17 +102,33 @@ act appropriately in different situations \cite{DBLP:conf/cvpr/SunSF17}. In shor
 
 However, to solve the social relationship detection task is not so simple. For a giving picture, detecting the social relationships of all the person pair is a difficult task. The models need to be adapted to different scenes and context information to make right judgments.  \cite{DBLP:conf/cvpr/SunSF17} use the information of head region, body region and human attributes to predict the person-pair's social relationship separately. \cite{DBLP:conf/iccv/LiWZK17} make use of the pair of people in question and region proposals and allocate attention to each region to detect the social relationship of each person pair. \cite{DBLP:conf/ijcai/WangCRYCL18} takes advantage of the message propagation between person pair social relationship and the object  semantic regions to solve the problem. The biggest problem of these models is that they all only detect one relationship per step which will cause that different social relationships in the same scene cannot interact with each other. Social relationships in the same scene are strongly linked but the previous models have ignored this important information.
 
-[Figure 1]
+\vspace*{-3mm}
+\begin{figure}[htpb]
+	\centering
+	%	\includegraphics[width=0.48 \textwidth, trim=10 10 10 80,clip]{./pic/example_new.pdf}
+	\includegraphics[width=0.48 \textwidth,clip]{./pic/example.png}
+	%\hspace{0.02\textwidth}
+	%\vspace*{-0.08cm}
+	\caption{An example image from PIPA dataset. There are 3 person-pair social relationships in the picture: friends, friends and grandma\_grandchild.}
+	\vspace*{-3.5mm}
+	\label{example}
+\end{figure}
 
-As one example in PIPA(Figure 1) where the picture denotes a scene. There are "father-child" relationship, "mother-child" relationship, "grandpa-grandchild" relationship and "grandma-grandchild" relationship in the scene. We can easily see that these relationships are related and belong to the "Attachment" relationship. In other words, we can easily use the interaction of different relationships in the same scene to detect each social relationship. Therefore we address the issue with focusing more on the interaction between every social relationships in one scene to improve the detection performance.
+As one example in PIPA(Figure \ref{example}) where the picture denotes a scene, there are 2  "friends" relationships and 1 "grandma\_grandchild" relationship in the scene. If we know only that two of these relationships are "friends, "we can infer that it is most likely a group of friends, and thus we infer that the unknown relationship is "friends" if they're similar in age. In other words, we can easily use the interaction of different relationships in the same scene to detect each social relationship. Therefore we address the issue with focusing more on the interaction between every social relationships in one scene to improve the social relationship detection performance.
 
-However, the biggest issue of the task is that it is not as simple as people directly judging the result. We need to design the mechanism of the interaction between social relationships and effectively model the mechanism. The other issue is how to use less effective information to model the interaction machanism and get the better result.
+However, the biggest issue of the task is that it is not as simple as people directly to judge the result. We need to design the mechanism of the interaction between social relationships and effectively model the mechanism. The other issue is how to use less effective information to model the interaction machanism and get the better result. For example, whether to introduce the information of the objects in scene has also became an important consideration for us.
 
-To address this problem, we propose a novel end-to-end trainable Person-Pair Relation Network (PRN).
+To address this problem, we propose a novel end-to-end trainable Person-Pair Relation Network (\PRN) which makes good use of the information of social relationship interaction in the same scene. \PRN \ consists of 3 parts:  Feature Extraction Module, Message Pooling Module and Message Padssing Module. In the Feature Extraction Module, we use a Resnet to extract features of each person and another Resnet to extract features of the person pairs in the scene. In this module, the position of each person is also taken into account. In the Message Pooling Module, we use a pooling mechanism to make all the social relationships interact with each other well and the outout of this module will be considered as the inputs of the GRU which is in the next module. In the Message Passing Module,  we use the RNNs contained GRU to make the social relationship message passing proceed iteratively. As the model proceeding, this module and the Message Pooling Module will have an interaction and make the overall interaction mechanism better. We use the hidden state of the last GRU as the social relationship detection results of the scene.
+
+We evaluate our model in classic datasets: PIPA-Relation dataset and PISC dataset. The experiment results verify the superiority of our model over previous methods. Specifically, our contributions are as follows:
+\begin{itemize}
+	\item To our best knowledge, it is the first attempt to introduce the interaction of social relationships in the same scene on the social relationship detection task;
+	\item We design a novel interaction mechanism to model the interaction of social relationships in the same scene which gets the best result in this task;
+	\item We analyze and verify that the role played by objects in the scene is not very big which is a very novel idea in the social relationship detection task.
+\end{itemize}
+
 
 \section{Related Work}
-
-This part will be written by {\bf liangjinrui} and it will be surveyed by {\bf liangjinrui} and {\bf chenhaicheng} by January 31.
 
 \subsection{Social Relationship Understanding}
 % Introduce social relationship understanding including \cite{DBLP:conf/aaai/GuoWWWG18}, \cite{DBLP:conf/iccv/LiWZK17}, \cite{DBLP:conf/ijcai/WangWG15} and \cite{DBLP:conf/ijcai/WangCRYCL18}.
@@ -118,16 +137,19 @@ The foundation of social network is the social relationships understanding, an i
 Unlike the aforementioned works which mainly focus on facial attributs or contextual object cues, we detaily studied the two classic datasets PISC \cite{DBLP:conf/iccv/LiWZK17} and PIPA-relation \cite{DBLP:conf/cvpr/SunSF17} and found the social relations in a still image have high semantic relevance. Based on this discovery, we designed a novel end-to-end trainable Person-Pair Relation Network (PRN), a graph inference network to capture this semantic relevance cues via message passing among person pair nodes.
 
 \subsection{Message Passing}%
+Graph inference is a kind of form of message passing and Conditional Random Fields (CRF) have been used extensively in this field. Johnson \etal \ used CRF to infer scene graph grounding distributions for image retrieval \cite{DBLP:conf/cvpr/JohnsonKSLSBL15}. Yatskar \etal \ use a deep CRF model to propose situation-driven object and action prediction\cite{DBLP:conf/cvpr/YatskarZF16} . Danfei Xu \etal \ use the GRU-RNNs to solve the scene graph generation problem iteratively\cite{DBLP:conf/cvpr/XuZCF17}. Our work is related to Graph-LSTM \cite{DBLP:conf/eccv/LiangSFLY16} and  the work of  Danfei Xu \etal \cite{DBLP:conf/cvpr/XuZCF17} which formulate the message passing problem using RNN models. Danfei Xu \etal \cite{DBLP:conf/cvpr/XuZCF17} design primal graph and dual graph in their model while we just simplify the model and just use one graph to make social relationship messages to pool and achieve a better result. As what Danfei Xu \etal \cite{DBLP:conf/cvpr/XuZCF17} have done, our model iteratively refines the social relationship predictions through relationship message passing in the scene, whereas the Structural RNN model only makes one-time predictions along the temporal dimension, and thus cannot refine its past predictions\cite{DBLP:conf/cvpr/XuZCF17}.
 
-
-Introduction to Message Passing, written by {\bf liangjinrui}.
- 
-
-
-\subsection{Rules and ILP}
-
-Introduce rules and ILP referring to \cite{DBLP:conf/ijcai/WangWG15}
-
+\vspace*{-3mm}
+\begin{figure*}[htpb]
+	\centering
+	%	\includegraphics[width=0.48 \textwidth, trim=10 10 10 80,clip]{./pic/example_new.pdf}
+	\includegraphics[width=0.96 \textwidth,clip]{./pic/model_1.png}
+	%\hspace{0.02\textwidth}
+	%\vspace*{-0.08cm}
+	\caption{An illustration of our \PRN . The model first extracts the features of each person and person pairs in the Feature Extraction Module. $P_i$ denotes the $i$th person and $P_{uij}$ denotes the union region of $i$th person and $j$th person. $b_i$ denotes the position of the $i$th person. In the Message Pooling Module, a message pooling function computes relationship messages that are passed to the node GRU in the next iteration from the hidden states. The $\oplus$ symbol denotes a learnt weighted sum. Then in the Message Passing Module, we iteratively updates the hidden states of the GRUs. We use the hidden states of the GRUs at the last iteration step, to predict the social relationships in the scene.}
+	\vspace*{-3.5mm}
+	\label{example}
+\end{figure*}
 
 
 \section{PRN model}
