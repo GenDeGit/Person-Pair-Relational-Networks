@@ -51,7 +51,7 @@
 
 % \title{Social Relationship Detection using Rules}
 
-\title{Understanding social relationship with person-pair relations}
+\title{Understanding Social Relationship with Person-Pair Relations}
 
 % Single author syntax
 \author{
@@ -189,7 +189,7 @@ This part will be written by {\bf chenhaicheng}.
   \label{fig:dataset_analysis}
 \end{figure}
 
-In this section we gave an analysis on PISC and PIPA-relation. Here we only used its train set and test set for statistic. As shown in Figure \ref{fig:dataset_analysis}, we first calculated the social relation categories of each image, and found almost all images have only one social relation category, and the other half have two categories. For example, on PISC, approximately 79.944\% of images have only one coarse category, while 20.0327\% images have two coarse one.
+In this subsection, we made an analysis on PISC and PIPA-relation. Here we only used its train set and test set for statistic. As shown in Figure \ref{fig:dataset_analysis}, we first calculated the social relation categories of each image, and found almost all images have only one social relation category, and the other half have two categories. For example, on PISC, approximately 79.944\% of images have only one coarse category, while 20.0327\% images have two coarse one.
 
 \subsection{Comparisons with State-of-the-Art Methods}
 
@@ -249,6 +249,15 @@ On this dataset, we also compare our proposed model with the existing Two stream
 \subsection{Experiment Analysis}
 \subsection{Ablation Study}
 \subsection{Case Study}
+
+\begin{figure}[t]
+  \centering
+  % \includegraphics[width=0.8\linewidth]{}
+  \caption{Comparison among social relationships with different sources, the green rectangle from the dataset, the yellow from our PRN and the blue from GRM. The person with box in various colors on left original image corresponds to the same color node in the right.}
+  \label{fig:case_study}
+\end{figure}
+
+Two examples in Figure \ref{fig:case_study} are shown to illustrate the capacity of our PRN to infer social relationshps. We compare two predicted social relationships, one from our PRN and the another from GRM \cite{DBLP:conf/ijcai/WangCRYCL18}.  
 
 \section{Conclusion}
 This part will be written by {\bf liangjinrui}.
