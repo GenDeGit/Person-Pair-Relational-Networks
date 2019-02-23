@@ -167,11 +167,8 @@ Given an image \textbf{I} and the bounding box of peoples, we first crop three p
 In addition, geometry feature of bounding box is complementary to the visual appearance, as the relation $\emph{No Relation}$, which is not easy to learn only from visual feature. We denote the geometry feature of bounding box i as $b_i^{pos}$ = $\{x_i^{min}, y_i^{min},x_i^{max},y_i^{max},area_i\}$  $\in$ $\mathbf{R}^5$, where all the parameters are relative values. These features also concatenated with the CNN features for $p_1,p_2$ and $p_u$ to form a single vector. Finally, both of them are fed into a fully connected layer to produce a 4096-dimension feature vector $v_h$. 
 
 \subsection{Message Passing Module} \label{section:RRNN}
-<<<<<<< HEAD
+
 In this module, we use the Recurrent Neural Networks(RNNs) to finish the inference of the social relationship detection task. In contrast to Zheng \etal \ \cite{DBLP:conf/iccv/0001JRVSDHT15}, our model use a generic RNN module to compute the hidden states. In addition, we select the best cell Gated Recurrent Units \cite{DBLP:conf/ssst/2014} for RNNs.We use the hidden state of the $t$-th step to denote the relationship node of the current social graph. In addition, the initial hidden state of the GRU is randomly assigned and the rest hidden state inheritance in the hidden state from the previous step. So the relationship node will be updated step by step as the GRU-based RNN going. Besides, the input of the GRU for each step comes from the output of the Message Pooling Module which has completed a social relationship interaction. This module can be formulated as follows:
-=======
-In this module, we use the Recurrent Neural Networks(RNNs) to finish the inference of the social relationship detection task. In contrast to Zheng \etal \ \cite{DBLP:conf/iccv/0001JRVSDHT15}, our model use a generic RNN module to compute the hidden states. In addition, we select the best cell Gated Recurrent Units \cite{DBLP:conf/ssst/ChoMBB14} for RNNs.We use the hidden state of the $t$th step to denote the relationship node of the current social graph. So the relationship node will be updated step by step as the GRU-based RNN going. This module can be formulated as follows:
->>>>>>> bd2f3edc91d071acb90f564d2c9bdd5b632a8f2c
 %\vspace{-0.5mm}
 \begin{equation}
 \begin{split}
