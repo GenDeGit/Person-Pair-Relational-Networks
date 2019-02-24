@@ -111,7 +111,7 @@ However, to solve the social relationship detection task is not so simple. For a
 	\includegraphics[width=0.48 \textwidth,clip]{./pic/example.png}
 	%\hspace{0.02\textwidth}
 	%\vspace*{-0.08cm}
-  \caption{An example image and its social relation graph from PIPA-relation. The person in various color boxes corresponds to the same color node in the graph. An edge linked to two nodes denotes the social relation between them. There are many examples with stable social relation in whole dataset and the detail statistic is in Sec. \ref{section:dataset_anaysis}.}
+ \caption{An example image and its social relation graph from PIPA-relation. The person in various color boxes corresponds to the same color node in the graph. An edge linked to two nodes denotes the social relation between them. There are many examples with stable social relation in whole dataset and the detail statistic is in Sec. \ref{section:dataset_anaysis}.}
 	\vspace*{-3.5mm}
 	\label{fig:example}
 \end{figure}
@@ -165,7 +165,6 @@ component to learn the representations of relationshipes between peoples in an i
 
 Given an image \textbf{I} and the bounding box of peoples, we first crop three patches for each person pair, where the first two cover each person, $\mathbf{p_1}$ and $\mathbf{p_2}$, and one for union region, $\mathbf{p_u}$, that cover the both people and maintains the basic information for recognition. These patches are resized to $224\times224$ pixels and fed into three CNNs, These feature vectors from the last convolutional layer are flattened and concatenated. $\mathbf{p_1}$ and $\mathbf{p_2}$ share the same weights.
 In addition, geometry feature of bounding box is complementary to the visual appearance, as the relation $\emph{No Relation}$, which is not easy to learn only from visual feature. We denote the geometry feature of bounding box i as $b_i^{pos}$ = $\{x_i^{min}, y_i^{min},x_i^{max},y_i^{max},area_i\}$  $\in$ $\mathbf{R}^5$, where all the parameters are relative values. These features also concatenated with the CNN features for $p_1,p_2$ and $p_u$ to form a single vector. Finally, both of them are fed into a fully connected layer to produce a 4096-dimension feature vector $v_h$. 
-
 
 \subsection{Message Passing Module} \label{section:RRNN}
 In this subsection, we will talk about how the social relationship message will pass to each other.
