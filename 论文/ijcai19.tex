@@ -157,7 +157,7 @@ Graph inference is a kind of form of message passing and Conditional Random Fiel
 \section{PRN \ Model}
 
 \subsection{Overview} \label{section:ov}
-In this section, we introduce the proposed \PRN for social relationships understanding. We fomulate the relationships of an image as a \emph{social graph}, each node denotes relationship of a person pair. Then, taking the same approach as GRM\cite{DBLP:conf/ijcai/WangCRYCL18} to extract various features initialize these nodes. Person pair relation  network employs Gated Recurrent Unit\cite{DBLP:conf/ssst/ChoMBB14} to explore the interaction of relationships with each other, and we employ the attention mechanism to adaptively exploit the most relevant nodes. It integrates multiple
+In this section, we introduce the proposed \PRN \ for social relationships understanding. We fomulate the relationships of an image as a \emph{social graph}, each node denotes relationship of a person pair. Then, taking the same approach as GRM\cite{DBLP:conf/ijcai/WangCRYCL18} to extract various features initialize these nodes. Person pair relation  network employs Gated Recurrent Unit\cite{DBLP:conf/ssst/ChoMBB14} to explore the interaction of relationships with each other, and we employ the attention mechanism to adaptively exploit the most relevant nodes. It integrates multiple
 component to learn the representations of relationship between peoples in an image. 
  The proposed framework is shown in Fig. 2.
 
@@ -246,7 +246,7 @@ In this subsection, we made an analysis on PISC and PIPA-relation. Here we only 
 
 \begin{table*}[htpb]
   \centering
-  \caption{Recall-per-class and mean average precision (mAP) evaluating our \PRN model and previous methods on PISC (in \%).}
+  \caption{Recall-per-class and mean average precision (mAP) evaluating our \PRN \ model and previous methods on PISC (in \%).}
   \label{tab:pisc_table}
   \begin{tabular}{c|p{0.5cm}<{\centering}|p{0.5cm}<{\centering}|p{0.5cm}<{\centering}|p{0.5cm}<{\centering}||p{0.5cm}<{\centering}|p{0.5cm}<{\centering}|p{0.5cm}<{\centering}|p{0.5cm}<{\centering}|p{0.5cm}<{\centering}|p{0.5cm}<{\centering}|p{0.5cm}<{\centering}}
     \hline
@@ -268,7 +268,7 @@ In this subsection, we made an analysis on PISC and PIPA-relation. Here we only 
 
 \begin{table}[htpb]
   \centering
-  \caption{Accuracy (in \%) evaluating our \PRN model and previous methods on PIPA-relation.}
+  \caption{Accuracy (in \%) evaluating our \PRN \ model and previous methods on PIPA-relation.}
   \label{tab:pipa_table}
   \begin{tabular}{c|c}
     \hline
@@ -297,7 +297,7 @@ Similar to the model of GRM, we also adopt the per-class recall and mean average
 
 \subsubsection{Performance On the PIPA-Relation Dataset}
 
-On this dataset, we also compare our proposed model with the existing methods,i.e, Two stream CNN\cite{DBLP:conf/cvpr/SunSF17},Dual-glance\cite{DBLP:conf/iccv/LiWZK17} and GRM\cite{DBLP:conf/ijcai/WangCRYCL18} that achieves the best performance before. Specifically, we directly reprint the experimental of serveral baselines from the literature. The result are presented in Table 2. Notably, our \PRN significantly outperforms previous methods. Still, our model outperforms all the baselines in PIPA-relation, and beating the best of them 2.4\%.  
+On this dataset, we also compare our proposed model with the existing methods,i.e, Two stream CNN\cite{DBLP:conf/cvpr/SunSF17},Dual-glance\cite{DBLP:conf/iccv/LiWZK17} and GRM\cite{DBLP:conf/ijcai/WangCRYCL18} that achieves the best performance before. Specifically, we directly reprint the experimental of serveral baselines from the literature. The result are presented in Table 2. Notably, our \PRN \ significantly outperforms previous methods. Still, our model outperforms all the baselines in PIPA-relation, and beating the best of them 2.4\%.  
 
 \subsection{Analysis On Experimental Result}
 
@@ -343,7 +343,7 @@ one, but uses max pooling (max pool).
 \begin{figure*}[ht]
   \centering
   \includegraphics[width=0.9\linewidth]{pic/case_study_pisc_fine_union.png}
-  \caption{Comparison of social relation graphs from different sources: (a) PISC fine, (b) our \PRN and (c) GRM. People with boxes of various colors on the original image correspond to the same color node on right of the image. An edge linked to two nodes represents the social relationships between them and its meaning can be found in the right legend. From these example, all edges in (a) are almost identical, which suggests that the social relationships in a still image are always stable.}
+  \caption{Comparison of social relation graphs from different sources: (a) PISC fine, (b) our \PRN \  and (c) GRM. People with boxes of various colors on the original image correspond to the same color node on right of the image. An edge linked to two nodes represents the social relationships between them and its meaning can be found in the right legend. From these example, all edges in (a) are almost identical, which suggests that the social relationships in a still image are always stable.}
   \label{fig:case_study}
 \end{figure*}
 
@@ -359,11 +359,11 @@ One possible reason is that the object regions cues is coverd by contexual infor
 
 \subsection{Case Study}\label{section:cs}
 
-Four examples in Figure \ref{fig:case_study} are shown to illustrate the ability of our \PRN to infer social relationships. We compared two predicted social relationships, one from our \PRN and the another from GRM \cite{DBLP:conf/ijcai/WangCRYCL18}. We found that compared to the social relation graphs in (c), the graphs in (b) are very similar to the graphs in (a), which means that our \PRN performs better than GRM. In addition, the edges in (a) are almost identical, meaning the social relationship in a still image are almost always stable. More importantly, similar to (a), over half of the edges in (b) are identical, which strongly suggests that the contextual relationship cues are very significant for social relationship understanding and our \PRN can fully utilize it. Considering the first example, the true social relation between the person in an orange box and another in a green one is No Relation, which can be correctly predicted by our \PRN while being incorrectly predicted as Couple by GRM, and the accuracy of \PRN is 100\% while 33.3\% in GRM.
+Four examples in Figure \ref{fig:case_study} are shown to illustrate the ability of our \PRN \ to infer social relationships. We compared two predicted social relationships, one from our \PRN \ and the another from GRM \cite{DBLP:conf/ijcai/WangCRYCL18}. We found that compared to the social relation graphs in (c), the graphs in (b) are very similar to the graphs in (a), which means that our \PRN \ performs better than GRM. In addition, the edges in (a) are almost identical, meaning the social relationship in a still image are almost always stable. More importantly, similar to (a), over half of the edges in (b) are identical, which strongly suggests that the contextual relationship cues are very significant for social relationship understanding and our \PRN \ can fully utilize it. Considering the first example, the true social relation between the person in an orange box and another in a green one is No Relation, which can be correctly predicted by our \PRN \ while being incorrectly predicted as Couple by GRM, and the accuracy of \PRN \ is 100\% while 33.3\% in GRM.
 
 \section{Conclusion}
 % This part will be written by {\bf liangjinrui}.
-In this study, we propse a Person-pair Relation Network(\PRN) that aims to solve social relationships recognition of an image. The proposed model incorporates the information of contexual relationships. The key challenge is to design a model for interaction between social relationships. \PRN consists of a reasoning module that propagates relationship message through the RNNs. In this way, it improves the quality of relationps prediction. Specifically, a attention also utilized to compute the weights factor for the connected nodes in a social graph, and these weights introduced to aggregates the messages. We also analysis the influence of contexual relationships and contexual object region, and we found that the cue of contexual object region coverd by contexual relationships. Extensive experiments on two large-scale benchmarks(PISC and PIPA-Relation) achieves better performance  without incur extra detecion annotations.
+In this study, we propse a Person-pair Relation Network(\PRN) that aims to solve social relationships recognition of an image. The proposed model incorporates the information of contexual relationships. The key challenge is to design a model for interaction between social relationships. \PRN \ consists of a reasoning module that propagates relationship message through the RNNs. In this way, it improves the quality of relationps prediction. Specifically, a attention also utilized to compute the weights factor for the connected nodes in a social graph, and these weights introduced to aggregates the messages. We also analysis the influence of contexual relationships and contexual object region, and we found that the cue of contexual object region coverd by contexual relationships. Extensive experiments on two large-scale benchmarks(PISC and PIPA-Relation) achieves better performance  without incur extra detecion annotations.
 
 \newpage
 %% The file named.bst is a bibliography style file for BibTeX 0.99c
