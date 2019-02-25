@@ -108,7 +108,7 @@ The aim of social relationships understanding is to infer the social relations a
 \begin{figure}[htpb]
 	\centering
 	%	\includegraphics[width=0.48 \textwidth, trim=10 10 10 80,clip]{./pic/example_new.pdf}
-	\includegraphics[width=0.48 \textwidth,clip]{./pic/example.png}
+	\includegraphics[width=0.48 \textwidth,clip]{./pic/example_1.png}
 	%\hspace{0.02\textwidth}
 	%\vspace*{-0.08cm}
  \caption{An example image and its social relation graph from PIPA-relation. The persons in various color boxes correspond to the same color node in the graph. An edge linked to two nodes denotes the social relation between them. There are many examples with stable social relation in whole dataset and the detail statistic is in Sec. \ref{section:dataset_anaysis}.}
@@ -145,7 +145,7 @@ Graph inference is a kind of form of message passing and Conditional Random Fiel
 \begin{figure*}[htpb]
 	\centering
 	%	\includegraphics[width=0.48 \textwidth, trim=10 10 10 80,clip]{./pic/example_new.pdf}
-	\includegraphics[width=0.96 \textwidth,clip]{./pic/model_2.png}
+	\includegraphics[width=0.96 \textwidth,clip]{./pic/model_3.png}
 	%\hspace{0.02\textwidth}
 	%\vspace*{-0.08cm}
 	\caption{An illustration of our \PRN . The model first extracts the features of each person and person pairs in the Feature Extraction Module. $P_i$ denotes the $i$-th person and $P_{uij}$ denotes the union region of $i$-th person and $j$th person. $b_i$ denotes the position of the $i$-th person. In the Message Pooling Module, a message pooling function computes relationship messages that are passed to the node GRU in the next iteration from the hidden states. The $\oplus$ symbol denotes a learnt weighted sum. Then in the Message Passing Module, we iteratively updates the hidden states of the GRUs. We use the hidden states of the GRUs at the last iteration step, to predict the social relationships in the scene.}
@@ -345,7 +345,7 @@ one, but uses max pooling (max pool).
 
 \begin{figure*}[ht]
   \centering
-  \includegraphics[width=0.9\linewidth]{pic/case_study_pisc_fine_union.png}
+  \includegraphics[width=0.8\linewidth]{pic/case_study_pisc_fine_union_1.png}
   \caption{Comparison of social relation graphs from different sources: (a) PISC fine, (b) our \PRN \  and (c) GRM. People with boxes of various colors on the original image correspond to the same color node on right of the image. An edge linked to two nodes represents the social relationships between them and its meaning can be found in the right legend. From these example, all edges in (a) are almost identical, which suggests that the social relationships in a still image are always stable.}
   \label{fig:case_study}
 \end{figure*}
