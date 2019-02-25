@@ -383,7 +383,9 @@ title = {Analysing Discourse : Textual Analysis for Social Research / N. Fairclo
                Jian Sun},
   title     = {Faster {R-CNN:} Towards Real-Time Object Detection with Region Proposal
                Networks},
-  booktitle = {Proceedings of {NIPS}},
+  booktitle = {Advances in Neural Information Processing Systems 28: Annual Conference
+               on Neural Information Processing Systems 2015, December 7-12, 2015,
+               Montreal, Quebec, Canada},
   pages     = {91--99},
   year      = {2015},
   crossref  = {DBLP:conf/nips/2015},

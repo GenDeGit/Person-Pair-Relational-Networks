@@ -102,10 +102,10 @@ Social relationships understanding is to infer the social relations among people
 %Social relationships are closely related to our daily life \cite{DBLP:conf/wacv/BarrCBF14}. After understanding the social relationship between the person pair, we can easily explain their behavior. For machines, only when they fully understand the social relationships, can they further understand and infer the human behavior in our social life, so as to make a better response. In addition, we often leave traces that capture social relationships in many medias and we not only want the machines to be proficient at their task, but also enable them to blend in and act appropriately in different situations \cite{DBLP:conf/cvpr/SunSF17}. In short, social relationship detection task is very significant in many ways. In our work, we aim to address the social relationship detection task for every picture where each picture represents a scene. However, to solve the social relationships detection task is not so simple. For a giving picture, detecting the social relationships of all the person pair is a difficult task. The models need to be adapted to different scenes and context information to make right judgments.  \cite{DBLP:conf/cvpr/SunSF17} use the information of the head region, the body region and human attributes to predict the person-pair's social relationships separately. \cite{DBLP:conf/iccv/LiWZK17} make use of the pair of people in question and region proposals and allocate attention to each region to detect the social relationship of each person pair. \cite{DBLP:conf/ijcai/WangCRYCL18} takes advantage of the message propagation between a person pair and the object semantic regions to solve the problem. The biggest problem of these models is that they all only detect one relationship per step which will cause that different social relationships in the same scene cannot interact with each other. Social relationships in the same scene are strongly linked but the previous models have ignored this important information.%
 Social relationships in either physical or virtual world form the basic of the social network in our daily life \cite{DBLP:conf/wacv/BarrCBF14}. Studies have shown that the implicit social relationships can be discovered from texts, images \cite{DBLP:conf/iccv/LiWZK17,DBLP:conf/ijcai/WangCRYCL18,DBLP:conf/eccv/WangGLF10,DBLP:conf/iccv/ZhangLLT15} and videos \cite{DBLP:conf/eccv/DingY10,DBLP:conf/cvpr/RamanathanY013,DBLP:journals/ivc/VinciarelliPB09}, where the latter two have attracted increasing attention in computer vision recently and here we mainly focus on the second one.
 
-The aim of social relationships understanding is to infer the social relations among people in a given scene such as a still image, which is a significantly important study in computer vision recently. For instance, nowadays with the increasing dependence of human on machines, understanding the social relationships enables the machines to blend in and make a better response in different situations. Besides, social relationships understanding is also helpful for avoiding the potential privacy risks via automatically parsing the information that may reveal social relations in many medias such as texts \cite{article} and informing the users about this. Many interesting studies has been made since the rise of deep learning. For example, \cite{DBLP:conf/cvpr/SunSF17} uses the information of head regions, body regions and human attributes to predict the person-pair's social relationships separately. \cite{DBLP:conf/iccv/LiWZK17} makes use of the person pair and region proposals and allocate attention to each region to for various person pairs. \cite{DBLP:conf/ijcai/WangCRYCL18} builds the Graph Reasoning Model (GRM) that incorporates common sense knowledge of the correlation between objects and a person pair. 
-All of previous works, a relathionship between two people is predicted independently, and the interaction between those relationships, which can help the prediction, are ignored. 
-There is an example from PIPA-relation \cite{DBLP:conf/cvpr/SunSF17} shown in Figure \ref{fig:example}, the social relationship of six person pairs are {\it Friends} except one is {\it Grandma\_grandchild}, which is mostly a group of friends. Intuitively, if we want to infer the social relationships of a person pair and already know several others with same relationship such as Friends, then the person pair has a high probability of being {\it Friends}. Therefore, the cues of contextual social relationships play an important role in social relationships understanding. 
-what's more, we made a detail analysis, and found that 
+The aim of social relationships understanding is to infer the social relations among people in a given scene such as a still image, which is a significantly important study in computer vision recently. For instance, nowadays with the increasing dependence of human on machines, understanding the social relationships enables the machines to blend in and make a better response in different situations. Besides, social relationships understanding is also helpful for avoiding the potential privacy risks via automatically parsing the information that may reveal social relations in many medias such as texts \cite{article} and informing the users about this. Many interesting studies has been made since the rise of deep learning. For example, \cite{DBLP:conf/cvpr/SunSF17} uses the information of head regions, body regions and human attributes to predict the person-pair's social relationships separately. \cite{DBLP:conf/iccv/LiWZK17} makes use of the person pair and region proposals and allocate attention to each region to for various person pairs. \cite{DBLP:conf/ijcai/WangCRYCL18} builds the Graph Reasoning Model (GRM) that incorporates common sense knowledge of the correlation between objects and a person pair.
+All of previous works, a relationship between two people is predicted independently, and the interaction between those relationships, which can help the prediction, are ignored.
+There is an example from PIPA-relation \cite{DBLP:conf/cvpr/SunSF17} shown in Figure \ref{fig:example}, the social relationship of six person pairs are {\it Friends} except one is {\it Grandma\_grandchild}, which is mostly a group of friends. Intuitively, if we want to infer the social relationships of a person pair and already know several others with same relationship such as Friends, then the person pair has a high probability of being {\it Friends}. Therefore, the cues of contextual social relationships play an important role in social relationships understanding.
+what's more, we made a detail analysis, and found that
 in many images, the relationships of person pairs in the same image tend to be similar, which inspires us to take into account the interaction among person pairs in this task.
 %there are many examples in a image with many person pairs and the social relationships in a still image are always stable,
 
@@ -117,24 +117,22 @@ in many images, the relationships of person pairs in the same image tend to be s
 	\includegraphics[width=0.48 \textwidth,clip]{./pic/example_1.png}
 	%\hspace{0.02\textwidth}
 	%\vspace*{-0.08cm}
- \caption{An example image and its social relation graph from PIPA-relation. 
-Each person under a mask corresponds to the node with the same color in the graph. An edge linked to two nodes denotes the social relation between them. 
-There are many  
-There are many examples with stable social relationships in whole dataset and the detail statistic is in Sec. \ref{section:dataset_anaysis}.}
+ \caption{An example of an image and its social relation graph from PIPA-relation.
+Each person under a mask corresponds to the node with the same color in the graph. An edge linked to two nodes denotes the social relation between them.
+There are many examples with stable social relationships in whole dataset that the same as this example, and the detail statistic is in Sec. \ref{section:dataset_anaysis}.}
 	\vspace*{-3.5mm}
 	\label{fig:example}
 \end{figure}
 
 %As one example from PIPA-relation \cite{DBLP:conf/cvpr/SunSF17} shown in Figure \ref{fig:example}, the social relationship of six person pairs is {\it Friends} except one is {\it Grandma\_grandchild}, which is mostly a group of friends. Intuitively, if we want to infer the social relationships of a person pair and already know several others with same relationship such as Friends, then the person pair has a high probability of being {\it Friends}. Therefore, the cues of contextual social relationships play an important role in social relationships understanding.%
 
-%However, it is a challenge to identify the social relationships between peoples in a image. 
+%However, it is a challenge to identify the social relationships between peoples in a image.
 
-It is still challenging to infer a unknown social relationship between two persons in a image. 
-Based on the cues we mentioned above, a mechanism is needed to model the the interaction between person pairs to predict known social relationships. 
-The previous works are incur the contexual objects region, but not all images contains useful objects. So, we propose a method that avoids using object regions. waht's more, the approach also model the interaction of various person pairs well. 
-For example, whether to introduce the information of the objects in scene has also became an important consideration for us.
+However, it is still challenging to infer a unknown social relationship between two persons in a image.
+Based on the cues we mentioned above, a mechanism is needed to model the the interaction between person pairs to predict known social relationships.
+The previous works are incur the contextual objects region, and these contextual region is not always correctly detected by extra annotation. So, whether to introduce the information of the objects in scene has also became an important consideration for us. Specifically, the proposing method should avoiding introduce uncertain information, and the approach also model the interaction of various person pairs in an image well.
 
-To address this problem, we propose a novel end-to-end trainable Person-Pair Relation Network (\PPRN) which makes good use of the information of social relationships interaction in the same scene. \PPRN \ consists of 3 parts:  \emph{feature extraction}, \emph{message pooling} and \emph{message passing}. In the feature extraction module, we use a ResNet\cite{DBLP:conf/cvpr/HeZRS16} to extract features of each person and another ResNet to extract features of the person pairs in the image. In this module, the position of each person is also taken into account. In the message pooling module, we use a attention mechanism to make all the social relationships interact with each other well and the output of this module will be considered as the inputs of the GRU unit. In the message passing module,  we use the RNNs contained GRU to make the social relationships message passing proceed iteratively. As the model proceeding, this module and the message pooling module will have an interaction and make the overall interaction mechanism better. We use the hidden states of the last GRU as the social relationships detection results of the scene.
+To address this problem, we propose a novel end-to-end trainable Person-Pair Relation Network (\PPRN) which makes good use of the information of social relationships interaction in the same scene. \PPRN \ consists of 3 parts:  \emph{feature extraction}, \emph{message pooling} and \emph{message passing}. In the feature extraction module, we use a ResNet\cite{DBLP:conf/cvpr/HeZRS16} to extract features of each person and another ResNet to extract features of the person pairs in the image. In this module, the position of each person is also taken into account. In the message pooling module, we use a attention mechanism to make all the social relationships interact with each other well and the output of this module will be considered as the inputs of the GRU unit. In the message passing module,  we use the RNNs contained GRU to make the social relationships message passing proceed iteratively. As the model proceeding, this message passing module and the message pooling module will have an interaction, and make the overall mechanism better. We use the hidden states of the last GRU as the social relationships detection results of the scene.
 
 We evaluate our model in classic datasets: PIPA-Relation dataset and PISC dataset. The experiment results verify the superiority of our model over previous methods. Specifically, our contributions are as follows:
 \begin{itemize}
@@ -149,7 +147,9 @@ We evaluate our model in classic datasets: PIPA-Relation dataset and PISC datase
 \subsection{Social Relationship Understanding}
 % Introduce social relationship understanding including \cite{DBLP:conf/aaai/GuoWWWG18}, \cite{DBLP:conf/iccv/LiWZK17}, \cite{DBLP:conf/ijcai/WangWG15} and \cite{DBLP:conf/ijcai/WangCRYCL18}.
 
-The foundation of social network is the social relationships understanding, an important multidisciplinary problem that has attracted increasing attention in computer vision recently. A much number of studies that aim to infer social relationships from images \cite{DBLP:conf/iccv/LiWZK17,DBLP:conf/ijcai/WangCRYCL18,DBLP:conf/eccv/WangGLF10,DBLP:conf/iccv/ZhangLLT15} and videos \cite{DBLP:conf/eccv/DingY10,DBLP:conf/cvpr/RamanathanY013,DBLP:journals/ivc/VinciarelliPB09} have been made since the rise of deep learning. For instance, motivated by psychological studies, \cite{DBLP:conf/iccv/ZhangLLT15} and \cite{DBLP:conf/iccv/DibekliogluSG13} exploit social relationships based on facial attributs such as expression and head pose, and affective behaviour analysis. Besides, \cite{DBLP:conf/iccv/LiWZK17} and \cite{DBLP:conf/ijcai/WangCRYCL18} discover that contextual cues around people play a significant role in social relationships inferring. Concretely, \cite{DBLP:conf/iccv/LiWZK17} proposed a dual-glance model for social relationships, where the first glance makes a coarse relationship prediction for a given person pair and then the second one refines the prediction by using the regions around the pair. \cite{DBLP:conf/ijcai/WangCRYCL18} constructed a semantic-aware knowledge graph and employed Gated Graph Neural Network (GGNN) \cite{DBLP:journals/tomccap/LiSKJZW15} to integrate the graph into the Graph Reasoning Model (GRM), a graph reasoning network where a proper message propagation and graph attention mechanism are introduced to explore the interaction between person pair and the contextual objects.
+The foundation of social network is the social relationships understanding, an important multidisciplinary problem that has attracted increasing attention in computer vision recently. A much number of studies that aim to infer social relationships from images \cite{DBLP:conf/iccv/LiWZK17,DBLP:conf/ijcai/WangCRYCL18,DBLP:conf/eccv/WangGLF10,DBLP:conf/iccv/ZhangLLT15} and videos \cite{DBLP:conf/eccv/DingY10,DBLP:conf/cvpr/RamanathanY013,DBLP:journals/ivc/VinciarelliPB09} have been made since the rise of deep learning. For instance, motivated by psychological studies, \cite{DBLP:conf/iccv/ZhangLLT15} and \cite{DBLP:conf/iccv/DibekliogluSG13} exploit social relationships based on facial attributes such as expression and head pose, and affective behaviour analysis. 
+Besides, \cite{DBLP:conf/iccv/LiWZK17} introduce the contextual regions that produced by Faster RCNN\cite{DBLP:conf/nips/RenHGS15} at first.
+\cite{DBLP:conf/iccv/LiWZK17} proposed a dual-glance model for social relationships, where the first glance makes a coarse relationship prediction for a given person pair and then the second one refines the prediction by using the regions around the pair; \cite{DBLP:conf/ijcai/WangCRYCL18} constructed a semantic-aware knowledge graph by detecting objects, and employed Gated Graph Neural Network (GGNN) \cite{DBLP:journals/tomccap/LiSKJZW15} to integrate the graph into the Graph Reasoning Model (GRM), a graph reasoning network where a proper message propagation and graph attention mechanism are introduced to explore the interaction between person pair and the contextual objects.
 
 Unlike the aforementioned works which mainly focus on facial attributes, neighboring regions or contextual objects, we studied the two classic datasets PISC \cite{DBLP:conf/iccv/LiWZK17} and PIPA-relation \cite{DBLP:conf/cvpr/SunSF17} in Sec. \ref{section:dataset_anaysis} and found the social relationships in a still image are always stable. Based on this discovery, we designed a novel end-to-end trainable Person-Pair Relation Network (\PPRN), a graph inference network to capture this semantic relevance cues via message passing among person pair nodes.
 
@@ -231,23 +231,23 @@ where $\text{N}(I)$ returns the number of person pair in image $I$, $\text{L}(\c
 \begin{table}[htpb]
   \centering
 	\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
-  \caption{Statistic on PISC and PIPA-relation. ``Sui.'' denotes that the percentage of person pair in an image with multiple person pairs. while ``Unsui.'' is its opposite. ``Single Rel.'' represents the images' proportion that has only one category of social relationship, while ``Multi Rel.'' is its opposite (in \%).}
+  \caption{Statistic on PISC and PIPA-relation. ``Sui.'' denotes that the percentage of person pair in an image with multiple person pairs. while ``Unsui.'' is its opposite. ``Single Rel.'' represents proportion of the images that have only one category of social relationship, while ``Multi Rel.'' is its opposite (in \%).}
   \label{tab:data_analysis}
   \begin{tabular}{c|c|p{0.9cm}<{\centering}|p{0.9cm}<{\centering}||p{0.9cm}<{\centering}|p{0.9cm}<{\centering}}
-    \hline
+    \midrule
     \multicolumn{2}{c|}{Dataset} & Sui. & Unsui. & \tabincell{c}{Single\\Rel.} & \tabincell{c}{Multi\\Rel.} \\
-    \hline
+    \midrule
     \multirow{2}*{PISC} & coarse & 87.1 & 12.9 & 79.9 & 20.1\\
     \cline{2-6}
     ~ & fine & 83.9 & 16.1 & 86.4 & 13.6 \\
-    \hline
+    \midrule
     \multicolumn{2}{c|}{PIPA-relation 16} & 71.9 & 28.1 & 94.9 & 5.1 \\
-    \hline
+    \midrule
   \end{tabular}
 \end{table}
 
 
-In this subsection, we made an analysis on PISC and PIPA-relation. Here we only used its train set and test set for statistic. As shown in table \ref{tab:data_analysis}, we first counted the social relationship categories of each image. Specifically, on PISC coarse, 79.9\% of images have only one coarse category, while 20.1\% images have multiple coarse one. Second, 87.1\% abd 83.9\% are  the proportion that suitable for interaction of person pairs.
+In this subsection, we made an analysis on PISC and PIPA-relation. Here we only used its train set and test set for statistic. As shown in table \ref{tab:data_analysis}, we first counted the relationship categories of each image. Specifically, on PISC coarse, 79.9\% of images have only one coarse category, while 20.1\% images have multiple coarse one. Second, 87.1\% and 83.9\% person pairs are the proportion that suitable for interaction in PISC coarse and PISC fine datasets.
 \subsection{Comparisons with State-of-the-Art Methods}
 
 \begin{table*}[htpb]
@@ -289,7 +289,7 @@ In this subsection, we made an analysis on PISC and PIPA-relation. Here we only 
   \end{tabular}
 \end{table}
 
-We compare our proposed model with existing state-of-the-art methods on both PISC and PIPA-Relation datasets.Formally, the compared methods are as followed:
+We compare our proposed model with existing state-of-the-art methods on both PISC and PIPA-Relation datasets. Formally, the compared methods are as followed:
 
 \subsubsection{Performance On the PISC dataset}
 
@@ -341,8 +341,8 @@ the factor of contextual object regions and the interaction between person-pair.
 
 \subsubsection{Significance Of Message Passing}
 
-In our framework, the core component is the introduction of message passing mechanism, and one of the key component is the message pooling functions that use learnt weights sum to aggregate hidden states of other relation nodes into message. To further investigate the improvement of our approach on recognizing social relationships, we evaluate variants of our model
-with standard pooling methods. The first is to use average-pooling (avg. pool) instead of the learnt weighted sum to
+In our framework, the core component is the introduction of message passing mechanism, and one of the key component is the message pooling functions that use the learnt weights sum to aggregate hidden states of other relationship nodes into message. To further investigate the improvement of our approach on recognizing social relationships, we evaluate variants of our model
+with standard pooling methods. The first is to use average pooling (avg. pool) instead of the learnt weighted sum to
 aggregate the hidden states. The second is similar to the first
 one, but uses max pooling (max pool).
 
@@ -356,8 +356,9 @@ one, but uses max pooling (max pool).
 \subsubsection{Analysis Of Contextual Information}
 
 First, our model is to process the cue of contextual relationships without contextual object region that incurred in Dual-glance and GRM by extra detection annotations.
-From the object regions point of view, the effect of object regions is provide the information of the scene to constrain the result of the relationship and the information of scene is single. So, object regions are limited for the images with multi-classes social relationships. But, the information of contextual relationships is different that is more appropriate for the fine relationships with multiple scene.
-For example, if the object of laptop is useful to classify the relationship as professional while is not contributive to the relationship of friend, and it's common of such scene with the two relationships.
+From the object regions point of view, the effect of object regions are provide the information of the scene to constrain the result of the relationship and the information of scene is single. 
+Contextual object region provide information on the premise that they can be correctly identified, and the object regions are always wrong due to the defects of current object detection model and the complexity of image scene.
+what's more, if the object of laptop is useful to classify the relationship as professional while not contribute to the relationship of friend, and there exists a scene with the two relationships. But, the relationship of professional will helpful to exclude the relationships such as family or couple.eg .
 As table 3 reported, RCNN, which uses only object information, has the worst effect. \cite{DBLP:conf/iccv/LiWZK17} trained a model with attention mechanisms to exploit different object regions cues according different pairs of people. we also conduct a attention mechanisms as same as Dual-glance, but the performance do not improved as reported in Table 3.
 One possible reason is that the object regions cues is covered by contextual information of relationships cues, and the result of experiments proved the analysis before.
 
@@ -376,4 +377,4 @@ In this study, we propose a Person-Pair Relation Network(\PPRN) that aims to sol
 \bibliographystyle{named}
 \bibliography{ijcai19}
 
-\end{document}
+\end{document} 
