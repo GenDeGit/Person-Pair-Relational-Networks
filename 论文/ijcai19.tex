@@ -303,16 +303,18 @@ Similar to the model of GRM, we also adopt the per-class recall and mean average
 
 \subsubsection{Performance On the PIPA-Relation Dataset}
 
-On this dataset, we also compare our proposed model with the existing methods,i.e, Two stream CNN\cite{DBLP:conf/cvpr/SunSF17},Dual-glance\cite{DBLP:conf/iccv/LiWZK17} and GRM\cite{DBLP:conf/ijcai/WangCRYCL18} that achieves the best performance before. Specifically, we directly reprint the experimental of several baselines from the literature. The result are presented in Table 2. Notably, our {\PPRN} significantly outperforms previous methods. Still, our model outperforms all the baselines in PIPA-relation, and beating the best of them 2.4\%.
+On this dataset, we also compare our proposed model with the existing methods,i.e, Two stream CNN\cite{DBLP:conf/cvpr/SunSF17},Dual-glance\cite{DBLP:conf/iccv/LiWZK17} and GRM\cite{DBLP:conf/ijcai/WangCRYCL18} that achieves the best performance before. Specifically, we directly reprint the experimental of several baselines from the literature. The result are presented in Table \ref{tab:pipa_table}. Notably, our {\PPRN} significantly outperforms previous methods. Still, our model outperforms all the baselines in PIPA-relation, and beating the best of them 2.4\%.
 
 \subsection{Analysis On Experimental Result}
 
 \begin{table}[htb]
 	\vspace*{-7.5pt}
+    
 	\centering
 	\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
 	\caption{The mAP and accuracy result of RCNN, our model and our model with contextual region that implements in the same way as dual-glance (in \%)}
-	\vspace*{0.1cm}
+	\label{tab:result_ana}
+    \vspace*{0.1cm}
 	\scalebox{1}{
 		\begin{tabular}{c|c|c|c|c}
 			\toprule
@@ -335,7 +337,7 @@ On this dataset, we also compare our proposed model with the existing methods,i.
 	}
 \end{table}
 
-In this section, we first present the comparison result  of message passing mechanism and analysis the reasons behind, and the result present in Table 3.
+In this section, we first present the comparison result  of message passing mechanism and analysis the reasons behind, and the result present in Table \ref{tab:result_ana}.
 Then, we conduct a conditional experiment to investigate the effectiveness of
 the factor of contextual object regions and the interaction between person-pair.
 
@@ -359,7 +361,7 @@ First, our model is to process the cue of contextual relationships without conte
 From the object regions point of view, the effect of object regions are provide the information of the scene to constrain the result of the relationship and the information of scene is single. 
 Contextual object region provide information on the premise that they can be correctly identified, and the object regions are always wrong due to the defects of current object detection model and the complexity of image scene.
 what's more, if the object of laptop is useful to classify the relationship as professional while not contribute to the relationship of friend, and there exists a scene with the two relationships. But, the relationship of professional will helpful to exclude the relationships such as family or couple.eg .
-As table 3 reported, RCNN, which uses only object information, has the worst effect. \cite{DBLP:conf/iccv/LiWZK17} trained a model with attention mechanisms to exploit different object regions cues according different pairs of people. we also conduct a attention mechanisms as same as Dual-glance, but the performance do not improved as reported in Table 3.
+As table \ref{tab:result_ana} reported, RCNN, which uses only object information, has the worst effect. \cite{DBLP:conf/iccv/LiWZK17} trained a model with attention mechanisms to exploit different object regions cues according different pairs of people. we also conduct a attention mechanisms as same as Dual-glance, but the performance do not improved as reported in Table \ref{tab:result_ana}.
 One possible reason is that the object regions cues is covered by contextual information of relationships cues, and the result of experiments proved the analysis before.
 
 %\subsection{Ablation Study}
