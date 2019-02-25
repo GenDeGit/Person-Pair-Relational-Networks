@@ -114,7 +114,9 @@ what's more, we made a detail analysis for current datasets and found that the s
 	%\hspace{0.02\textwidth}
 	%\vspace*{-0.08cm}
  \caption{An example image and its social relation graph from PIPA-relation. 
-Each person under a mask corresponds to the node with the same color in the graph. An edge linked to two nodes denotes the social relation between them. There are many examples with stable social relation in whole dataset and the detail statistic is in Sec. \ref{section:dataset_anaysis}.}
+Each person under a mask corresponds to the node with the same color in the graph. An edge linked to two nodes denotes the social relation between them. 
+There are many examples with 
+There are many examples with stable social relationships in whole dataset and the detail statistic is in Sec. \ref{section:dataset_anaysis}.}
 	\vspace*{-3.5mm}
 	\label{fig:example}
 \end{figure}
@@ -128,7 +130,7 @@ Based on the cues we mentioned above, a mechanism is needed to model the the int
 The previous works are incur the contexual objects region, but not all images contains useful objects. So, we propose a method that avoids using object regions. waht's more, the approach also model the interaction of various person pairs well. 
 For example, whether to introduce the information of the objects in scene has also became an important consideration for us.
 
-To address this problem, we propose a novel end-to-end trainable Person-Pair Relation Network (\PPRN) which makes good use of the information of social relationships interaction in the same scene. \PPRN \ consists of 3 parts:  \emph{feature extraction}, \emph{message pooling} and \emph{message passing}. In the feature extraction module, we use a ResNet\cite{DBLP:conf/cvpr/HeZRS16} to extract features of each person and another ResNet to extract features of the person pairs in the image. In this module, the position of each person is also taken into account. In the message pooling module, we use a attention mechanism to make all the social relationships interact with each other well and the output of this module will be considered as the inputs of the GRU which is in the next module. In the message passing module,  we use the RNNs contained GRU to make the social relationships message passing proceed iteratively. As the model proceeding, this module and the message pooling module will have an interaction and make the overall interaction mechanism better. We use the hidden states of the last GRU as the social relationships detection results of the scene.
+To address this problem, we propose a novel end-to-end trainable Person-Pair Relation Network (\PPRN) which makes good use of the information of social relationships interaction in the same scene. \PPRN \ consists of 3 parts:  \emph{feature extraction}, \emph{message pooling} and \emph{message passing}. In the feature extraction module, we use a ResNet\cite{DBLP:conf/cvpr/HeZRS16} to extract features of each person and another ResNet to extract features of the person pairs in the image. In this module, the position of each person is also taken into account. In the message pooling module, we use a attention mechanism to make all the social relationships interact with each other well and the output of this module will be considered as the inputs of the GRU unit. In the message passing module,  we use the RNNs contained GRU to make the social relationships message passing proceed iteratively. As the model proceeding, this module and the message pooling module will have an interaction and make the overall interaction mechanism better. We use the hidden states of the last GRU as the social relationships detection results of the scene.
 
 We evaluate our model in classic datasets: PIPA-Relation dataset and PISC dataset. The experiment results verify the superiority of our model over previous methods. Specifically, our contributions are as follows:
 \begin{itemize}
@@ -225,11 +227,11 @@ where $\text{N}(I)$ returns the number of person pair in image $I$, $\text{L}(\c
 \begin{table}[htpb]
   \centering
 	\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
-  \caption{A statistic of person-pair (in \%). }
+  \caption{Statistic on PISC and PIPA-relation. ``Sui.'' denotes that the percentage of person pair in an image with multiple person pairs. while ``Unsui.'' is its opposite. ``Single Rel.'' represents the images' proportion that has only one category of social relationship, while ``Multi Rel.'' is its opposite (in \%).}
   \label{tab:data_analysis}
-  \begin{tabular}{c|c|c|c||c|c}
+  \begin{tabular}{c|c|p{0.9cm}<{\centering}|p{0.9cm}<{\centering}||p{0.9cm}<{\centering}|p{0.9cm}<{\centering}}
     \hline
-    \multicolumn{2}{c|}{Dataset} & Sup. & Unsup. & \tabincell{c}{Single\\Rel.} & \tabincell{c}{Multi\\Rel.} \\
+    \multicolumn{2}{c|}{Dataset} & Sui. & Unsui. & \tabincell{c}{Single\\Rel.} & \tabincell{c}{Multi\\Rel.} \\
     \hline
     \multirow{2}*{PISC} & coarse & 87.1 & 12.9 & 79.9 & 20.1\\
     \cline{2-6}
@@ -241,8 +243,7 @@ where $\text{N}(I)$ returns the number of person pair in image $I$, $\text{L}(\c
 \end{table}
 
 
-In this subsection, we made an analysis on PISC and PIPA-relation. Here we only used its train set and test set for statistic. As shown in Figure \ref{fig:dataset_analysis}, we first counted the social relationship categories of each image, and found almost all images have only one social relation category, and the other half have two categories. For example, on PISC, approximately 79.944\% of images have only one coarse category, while 20.0327\% images have two coarse one.
-
+In this subsection, we made an analysis on PISC and PIPA-relation. Here we only used its train set and test set for statistic. As shown in table \ref{tab:data_analysis}, we first counted the social relationship categories of each image. Specifically, on PISC coarse, 79.9\% of images have only one coarse category, while 20.1\% images have multiple coarse one. Second, 87.1\% abd 83.9\% are  the proportion that suitable for interaction of person pairs.
 \subsection{Comparisons with State-of-the-Art Methods}
 
 \begin{table*}[htpb]
