@@ -145,7 +145,7 @@ Graph inference is a kind of form of message passing and Conditional Random Fiel
 \begin{figure*}[htpb]
 	\centering
 	%	\includegraphics[width=0.48 \textwidth, trim=10 10 10 80,clip]{./pic/example_new.pdf}
-	\includegraphics[width=0.96 \textwidth,clip]{./pic/model_3.png}
+	\includegraphics[width=0.96 \textwidth,clip]{./pic/model_4.png}
 	%\hspace{0.02\textwidth}
 	%\vspace*{-0.08cm}
 	\caption{An illustration of our \PRN . The model first extracts the features of each person and person pairs in the Feature Extraction Module. $P_i$ denotes the $i$-th person and $P_{uij}$ denotes the union region of $i$-th person and $j$th person. $b_i$ denotes the position of the $i$-th person. In the Message Pooling Module, a message pooling function computes relationship messages that are passed to the node GRU in the next iteration from the hidden states. The $\oplus$ symbol denotes a learnt weighted sum. Then in the Message Passing Module, we iteratively updates the hidden states of the GRUs. We use the hidden states of the GRUs at the last iteration step, to predict the social relationships in the scene.}
