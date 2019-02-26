@@ -126,9 +126,8 @@ There are many examples with stable social relationships in whole dataset that t
 \looseness=-1
 
 However, all of previous works infer the social relationship of each person pair in isolation, without taking into account the interaction of different pairs.
-As an example from PIPA-relation \cite{DBLP:conf/cvpr/SunSF17} shown in Figure \ref{fig:example}, the social relationship of six person pairs are {\it Friends} except one is {\it Grandma\_grandchild}, which is mostly a group of friends. Intuitively, if we want to infer the social relationships of a person pair and already know several others with same relationship such as {\it Friends}, then the person pair has a high probability of being {\it Friends}. Therefore, the cues of contextual social relationships play an important role in social relationships understanding.
-What's more, we made analyze PISC and PIPA-relation datasets (\ref{section:dataset_anaysis}), and found that
-in many images, the relationships of person pairs in the same image tend to be similar, which inspires us to take into account the interaction among person pairs in this task.
+As an example from PIPA-relation \cite{DBLP:conf/cvpr/SunSF17} shown in Figure \ref{fig:example}, the social relationships of six person pairs are {\it Friends} except one is {\it Grandma\_grandchild}, which is mostly a group of friends. Intuitively, if we want to infer the social relationships of a person pair and already know several others with same relationship such as {\it Friends}, then the person pair has a high probability of being {\it Friends}. Therefore, the interaction of person-pair social relationships play an important role in social relationships understanding, which inspires us to take into account the interaction in this task.
+What's more, we analyze PISC and PIPA-relation datasets (\ref{section:dataset_anaysis}), and found that in many images, the relationships of person pairs in the same image tend to be similar.
 %there are many examples in a image with many person pairs and the social relationships in a still image are always stable,
 
 %As one example from PIPA-relation \cite{DBLP:conf/cvpr/SunSF17} shown in Figure \ref{fig:example}, the social relationship of six person pairs is {\it Friends} except one is {\it Grandma\_grandchild}, which is mostly a group of friends. Intuitively, if we want to infer the social relationships of a person pair and already know several others with same relationship such as Friends, then the person pair has a high probability of being {\it Friends}. Therefore, the cues of contextual social relationships play an important role in social relationships understanding.%
@@ -300,7 +299,7 @@ We compare our proposed model with the existing state-of-the-art methods on both
 
 \subsubsection{Performance On the PISC dataset}
 
-{\bf UnionCNN}  Following \cite{DBLP:conf/eccv/LuKBL16}, it generates a single CNN model to predicate relations. In this task, we also feeds the union region of person pair to a single CNN for classification.\\
+{\bf UnionCNN} following \cite{DBLP:conf/eccv/LuKBL16}, it generates a single CNN model to predicate relations. In this task, we also feeds the union region of person pair to a single CNN for classification.\\
 {\bf Pair CNN}\cite{DBLP:conf/iccv/LiWZK17} consists of two equivalent CNNs with shared weights to extracted features for cropped image for two individuals.\\
 {\bf Pair CNN + BBox + Union}\cite{DBLP:conf/iccv/LiWZK17} incorporates spatial location information of two bounding box that based the previous Pair CNN and Union CNN.\\
 {\bf Dual-glance}\cite{DBLP:conf/iccv/LiWZK17} implements coarse and fine prediction which includes three and six relationships. Dual-glance employing Pair CNN + BBox + BBox + Union and utilized surrounding region proposal to refine the prediction.\\
@@ -373,7 +372,7 @@ One possible reason is that the object regions cues is covered by contextual inf
 
 \subsection{Case Study}\label{section:cs}
 
-Four examples in Figure \ref{fig:case_study} are shown to illustrate the ability of our {\PPRN} to infer social relationships. We compared two predicted social relationships, one from our {\PPRN} and the another from GRM \cite{DBLP:conf/ijcai/WangCRYCL18}. We found that compared to the social relation graphs in (c), the graphs in (b) are very similar to the graphs in (a), which means that our {\PPRN} performs better than GRM. In addition, similar to (a), over half of the edges in (b) are identical, which strongly suggests that the contextual relationship cues are very significant for social relationship understanding and our {\PPRN} can fully utilize it. Considering the first example, the true social relation between the person in an orange box and another in a green one is No Relation, which can be correctly predicted by our {\PPRN} while being incorrectly predicted as Couple by GRM, and the accuracy of {\PPRN} is 100\% while 33.3\% in GRM.
+Four examples in Figure \ref{fig:case_study} are shown to illustrate the capability of our {\PPRN} to infer social relationships. We compared two predicted social relationships, one from our {\PPRN} and the another from GRM \cite{DBLP:conf/ijcai/WangCRYCL18}. We found that compared to the social relation graphs in (c), the graphs in (b) are very similar to the graphs in (a), which means that our {\PPRN} performs better than GRM. In addition, similar to (a), over half of the edges in (b) are identical, which strongly suggests that the contextual relationship cues are very significant for social relationship understanding and our {\PPRN} can fully utilize it. Considering the first example, the true social relation between the person in an orange box and another in a green one is No Relation, which can be correctly predicted by our {\PPRN} while being incorrectly predicted as Couple by GRM, and the accuracy of {\PPRN} is 100\% while 33.3\% in GRM.
 
 \section{Conclusion}
 % This part will be written by {\bf liangjinrui}.
