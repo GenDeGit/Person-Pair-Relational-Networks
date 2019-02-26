@@ -141,7 +141,7 @@ Based on the cues we mentioned above, a mechanism is needed to model the interac
 
 To address this problem, we propose a novel end-to-end trainable Person-Pair Relation Network (\PPRN) which makes good use of the information of social relationships interaction in the same scene. \PPRN \ consists of 3 parts:  \emph{feature extraction}, \emph{message pooling}, and \emph{message passing}. In the feature extraction module, we use a ResNet \cite{DBLP:conf/cvpr/HeZRS16} to extract features of each person and another ResNet to extract features of the person pairs in the image. In this module, the position of each person is also taken into account. In the message pooling module, we use an attention mechanism to make all the social relationships interact with each other well and the output of this module will be considered as the inputs of the GRU unit. In the message passing module,  we use the RNNs contained GRU to make the social relationships message passing proceed iteratively. As the model proceeding, this message passing module and the message pooling module will have an interaction, and make the overall mechanism better. We use the hidden states of the last GRU as the social relationships detection results of the scene.
 
-We evaluate our model in classic datasets: PIPA-Relation dataset and PISC dataset. The experiment results verify the superiority of our model over previous methods. Specifically, our contributions are as follows:
+We evaluate our model in classic datasets: PIPA-Relation dataset and PISC dataset. The experiment results verify the superiority of our model over previous methods.\footnote{Due to space limit, omitted data, code, and supporting materials are provided in the online appendix ({\scriptsize\url{https://tinyurl.com/IJCAI19-229}}).} Specifically, our contributions are as follows:
 \begin{itemize}
 	\item To our best knowledge, it is the first attempt to introduce the idea of multiple person pair's relationships in the same scene on the social relationship detection understanding;
 	\item We design a novel interaction mechanism to model the interaction of social relationships in the same scene which gets the best result in this task;
@@ -166,7 +166,7 @@ Graph inference is a kind of form of message passing and Conditional Random Fiel
 \begin{figure*}[htpb]
 	\centering
 	%	\includegraphics[width=0.48 \textwidth, trim=10 10 10 80,clip]{./pic/example_new.pdf}
-	\includegraphics[width=0.96 \textwidth,clip]{./pic/model_4.png}
+	\includegraphics[width=0.96 \textwidth,clip]{./pic/model_5.png}
 	%\hspace{0.02\textwidth}
 	%\vspace*{-0.08cm}
 	\caption{An illustration of our \PPRN . The model first extracts the features of each person and person pairs in the Feature Extraction Module. $P_i$ denotes the $i$-th person and $P_{uij}$ denotes the union region of $i$-th person and $j$-th person. $b_i$ denotes the position of the $i$-th person. In the Message Pooling Module, a message pooling function computes relationship messages that are passed to the node GRU in the next iteration from the hidden states. The $\oplus$ symbol denotes a learnt weighted sum. Then in the Message Passing Module, we iteratively updates the hidden states of the GRUs. We use the hidden states of the GRUs at the last iteration step, to predict the social relationships in the scene.}
@@ -355,7 +355,7 @@ one, but uses max pooling (max pool).
 
 \begin{figure*}[ht]
   \centering
-  \includegraphics[width=0.8\linewidth]{pic/case_study_pisc_fine_union_1.png}
+  \includegraphics[width=0.75\linewidth]{pic/case_study_pisc_fine_union_1.png}
   \caption{Comparison of social relation graphs from different sources: (a) PISC fine, (b) our {\PPRN}  and (c) GRM. People with boxes of various colors on the original image correspond to the same color node on right of the image. An edge linked to two nodes represents the social relationships between them and its meaning can be found in the right legend. From these example, all edges in (a) are almost identical, which suggests that the social relationships in a still image are always stable.}
   \label{fig:case_study}
 \end{figure*}
