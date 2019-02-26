@@ -94,7 +94,7 @@ fourth@example.com
 \begin{abstract}
 % Social relationships play a very important role in social network. Social relationship understanding has attracted increasing attention, typically, which can help to understand the behavior of humen in our daily life. Previous social relationship understanding models focused too much on relationships between the same pair and ignore the interplay of different relationships in the same scene.  We found that the interaction between the relationships in the same scene plays an important role in the understanding of social relations and we can make meanful use of rules during inference. This paper proposes a novel model named {\it SRDR} which incorporates rules seamlessly into the deep learning model named {\it SR}  to solve the social relationship understanding problem. It formulates inference as an integer linear programming (ILP) problem, with the objective function generated from {\it SR} and the constraints translated from rules. By incorporating rules, our approach can greatly reduce the solution space and significantly improve the inference accuracy of social relationship understanding models. Experimental results on two classic data sets show that our approach significantly outperforms state-of-the-art  models in social relationship understanding, which justifies the significance of incorporating rules seamlessly into the deep learning model in social relationship understanding task.
 \looseness=-1
-Social relationships understanding is to infer the social relations among people in a given scene, which has attracted increasing attention in computer vision recently. Great progress has been made since the rise of deep learning. However, all of previous works infer the social relationship of each person pair in isolation, without taking into account the interaction of different pairs. It is natural to consider these interaction cues, {\it i.e.}, the mutual influence of multiple person pairs, in social relationship understanding. For instance, if two person pairs in an image are {\it Friends}, then the third pair is always {\it Friends} or at least other similar relations but not {\it No Relation}. Therefore, to capture these interaction cues, we propose a novel end-to-end trainable Person-Pair Relation Network (\PPRN) using standard RNNs, a graph inference network that learns iteratively to improve its predictions via message passing among person pair nodes. Extensive experiments on PISC and PIPA-Relation show the superiority of our method over previous methods.
+Social relationships understanding is to infer the social relations among people in a given scene, which has attracted increasing attention in computer vision recently. Great progress has been made since the rise of deep learning. However, all of previous works infer the social relationship of each person pair in isolation, without taking into account the interaction of different pairs. It is natural to consider these interaction cues, {\it i.e.}, the mutual influence of multiple person pairs, in social relationship understanding. For instance, if two person pairs in an image are {\it Friends}, then the third pair is always {\it Friends} or at least other similar relations but not {\it No Relation}. Therefore, to capture these interaction cues, we propose a novel end-to-end trainable Person-Pair Relation Network (\PPRN) using standard RNNs, a graph inference network that learns iteratively to improve its predictions via message passing among person pair nodes. Extensive experiments on PISC and PIPA-relation show the superiority of our method over previous methods.
 
 
 \end{abstract}
@@ -125,9 +125,9 @@ There are many examples with stable social relationships in whole dataset that t
 \end{figure}
 \looseness=-1
 
-However, all of previous works, a relationship between two people is predicted independently, and the interaction between those relationships, which can help the prediction, are ignored.
-There is an example from PIPA-relation \cite{DBLP:conf/cvpr/SunSF17} shown in Figure \ref{fig:example}, the social relationship of six person pairs are {\it Friends} except one is {\it Grandma\_grandchild}, which is mostly a group of friends. Intuitively, if we want to infer the social relationships of a person pair and already know several others with same relationship such as {\it Friends}, then the person pair has a high probability of being {\it Friends}. Therefore, the cues of contextual social relationships play an important role in social relationships understanding.
-Furthermore, we made a detail analysis on PISC and PIPA-Relation datasets, and found that
+However, all of previous works infer the social relationship of each person pair in isolation, without taking into account the interaction of different pairs.
+As an example from PIPA-relation \cite{DBLP:conf/cvpr/SunSF17} shown in Figure \ref{fig:example}, the social relationship of six person pairs are {\it Friends} except one is {\it Grandma\_grandchild}, which is mostly a group of friends. Intuitively, if we want to infer the social relationships of a person pair and already know several others with same relationship such as {\it Friends}, then the person pair has a high probability of being {\it Friends}. Therefore, the cues of contextual social relationships play an important role in social relationships understanding.
+What's more, we made analyze PISC and PIPA-relation datasets (\ref{section:dataset_anaysis}), and found that
 in many images, the relationships of person pairs in the same image tend to be similar, which inspires us to take into account the interaction among person pairs in this task.
 %there are many examples in a image with many person pairs and the social relationships in a still image are always stable,
 
@@ -141,7 +141,7 @@ Based on the cues we mentioned above, a mechanism is needed to model the interac
 
 To address this problem, we propose a novel end-to-end trainable Person-Pair Relation Network (\PPRN) which makes good use of the information of social relationships interaction in the same scene. \PPRN \ consists of 3 parts:  \emph{feature extraction}, \emph{message pooling}, and \emph{message passing}. In the feature extraction module, we use a ResNet \cite{DBLP:conf/cvpr/HeZRS16} to extract features of each person and another ResNet to extract features of the person pairs in the image. In this module, the position of each person is also taken into account. In the message pooling module, we use an attention mechanism to make all the social relationships interact with each other well and the output of this module will be considered as the inputs of the GRU unit. In the message passing module,  we use the RNNs contained GRU to make the social relationships message passing proceed iteratively. As the model proceeding, this message passing module and the message pooling module will have an interaction, and make the overall mechanism better. We use the hidden states of the last GRU as the social relationships detection results of the scene.
 
-We evaluate our model in classic datasets: PIPA-Relation dataset and PISC dataset. The experiment results verify the superiority of our model over previous methods.\footnote{Due to space limit, omitted data, code, and supporting materials are provided in the online appendix ({\scriptsize\url{https://tinyurl.com/IJCAI19-229}}).} Specifically, our contributions are as follows:
+We evaluate our model in classic datasets: PIPA-relation dataset and PISC dataset. The experiment results verify the superiority of our model over previous methods.\footnote{Due to space limit, omitted data, code, and supporting materials are provided in the online appendix ({\scriptsize\url{https://tinyurl.com/IJCAI19-229}}).} Specifically, our contributions are as follows:
 \begin{itemize}
 	\item To our best knowledge, it is the first attempt to introduce the idea of multiple person pair's relationships in the same scene on the social relationship detection understanding;
 	\item We design a novel interaction mechanism to model the interaction of social relationships in the same scene which gets the best result in this task;
@@ -158,7 +158,7 @@ The foundation of social network is the social relationships understanding, an i
 Besides, \cite{DBLP:conf/iccv/LiWZK17} introduce the contextual regions that produced by Faster RCNN\cite{DBLP:conf/nips/RenHGS15} at first.
 \cite{DBLP:conf/iccv/LiWZK17} proposed a dual-glance model for social relationships, where the first glance makes a coarse relationship prediction for a given person pair and then the second one refines the prediction by using the regions around the pair; \cite{DBLP:conf/ijcai/WangCRYCL18} constructed a semantic-aware knowledge graph by detecting objects, and employed Gated Graph Neural Network (GGNN) \cite{DBLP:journals/tomccap/LiSKJZW15} to integrate the graph into the Graph Reasoning Model (GRM), a graph reasoning network where a proper message propagation and graph attention mechanism are introduced to explore the interaction between person pair and the contextual objects.
 
-Unlike the aforementioned works which mainly focus on facial attributes, neighboring regions or contextual objects, we studied the two classic datasets PISC \cite{DBLP:conf/iccv/LiWZK17} and PIPA-relation \cite{DBLP:conf/cvpr/SunSF17} in Sec. \ref{section:dataset_anaysis} and found the social relationships in a still image are always stable. Based on this discovery, we designed a novel end-to-end trainable Person-Pair Relation Network (\PPRN), a graph inference network to capture this semantic relevance cues via message passing among person pair nodes.
+Unlike the aforementioned works which infer the social relationship of each person pair in isolation, our Person-Pair Relation Network (\PPRN) can capture the interaction cues of different person pairs,{ \it i.e.}, the mutual influence of these pairs, via messge passing mechanism. 
 
 \subsection{Message Passing}%
 Graph inference is a kind of form of message passing and Conditional Random Fields (CRF) have been used extensively in this field. Johnson \etal \ used CRF to infer scene graph grounding distributions for image retrieval \cite{DBLP:conf/cvpr/JohnsonKSLSBL15}. Yatskar \etal \ use a deep CRF model to propose situation-driven object and action prediction\cite{DBLP:conf/cvpr/YatskarZF16} . Danfei Xu \etal \ use the GRU-RNNs to solve the scene graph generation problem iteratively\cite{DBLP:conf/cvpr/XuZCF17}. Our work is related to Graph-LSTM \cite{DBLP:conf/eccv/LiangSFLY16} and  the work of  Danfei Xu \etal \cite{DBLP:conf/cvpr/XuZCF17} which formulate the message passing problem using RNN models. Danfei Xu \etal \cite{DBLP:conf/cvpr/XuZCF17} design primal graph and dual graph in their model while we just simplify the model and just use one graph to make social relationship messages to pool and achieve a better result. As what Danfei Xu \etal \cite{DBLP:conf/cvpr/XuZCF17} have done, our model iteratively refines the social relationship predictions through relationship message passing in the scene, whereas the Structural RNN model only makes one-time predictions along the temporal dimension, and thus cannot refine its past predictions\cite{DBLP:conf/cvpr/XuZCF17}.
@@ -177,9 +177,8 @@ Graph inference is a kind of form of message passing and Conditional Random Fiel
 
 \section{PPRN \ Model}
 
-In this section, we introduce the proposed {\PPRN} for social relationships understanding. We formulate the relationships of an image as a \emph{social graph}, each node denotes relationship of a person pair. Then, taking the same approach as GRM\cite{DBLP:conf/ijcai/WangCRYCL18} to extract various features initialize these nodes. Person pair relation  network employs Gated Recurrent Unit\cite{DBLP:conf/ssst/ChoMBB14} to explore the interaction of relationships with each other, and we employ the attention mechanism to adaptively exploit the most relevant nodes. It integrates multiple
-component to learn the representations of relationship between peoples in an image.
- The proposed framework is shown in Fig. 2.
+In this section, we introduce the proposed {\PPRN} for social relationships understanding. We formulate the relationships of an image as a \emph{social graph}, each node denotes relationship of a person pair. Then, taking the same approach as GRM\cite{DBLP:conf/ijcai/WangCRYCL18} to extract various features initialize these nodes. Person pair relation  network employs Gated Recurrent Unit\cite{DBLP:conf/ssst/ChoMBB14} to explore the interaction of relationships with each other, and we employ the attention mechanism to adaptively exploit the most relevant nodes. It integrates multiple component to learn the representations of relationship between peoples in an image.
+The proposed framework is shown in figure \ref{fig:model}.
 
 \subsection{Feature Extraction Module} \label{section:vs}
 
@@ -229,7 +228,7 @@ where $\text{N}(I)$ returns the number of person pair in image $I$, $\text{L}(\c
 
 \subsection{Experiment Setting}
 
-{\bf Datasets.} In this work, two datasets are used to evaluate our proposed method. The first one is the large-scale People in Social Context (PISC) \cite{DBLP:conf/iccv/LiWZK17} with 22,670 images and contains two-level recognition tasks: {\bf 3 Coarse-level relationship}, namely {\it No Relation, Intimate Relation, None-Intimate Relation} and {\bf 6 Fine-level relationship}, i.e., {\it Friend, Family, Couple, Professional, Commercial, No Relation}. The second one is the People in Photo Album Relation (PIPA-Relation) \cite{DBLP:conf/cvpr/SunSF17}, an extension version of People in Photo Album (PIPA) \cite{DBLP:conf/cvpr/ZhangPTFB15} with 37107 images. It also annotates 26,915 person pairs on two-level recognition tasks: {\bf 5 Social Domains} and {\bf 16 Social Relations} based on these domains. The train/val/test in PISC are 13,142/4,000/4,000 images with 14,536/25,636/15,497 person pairs on coarse level relationship, and 16,828/500/1,250 images with 55,400/1,505/3,691 person pairs on fine level relationship, respectively. In PIPA-relation, we follow \cite{DBLP:conf/ijcai/WangCRYCL18} and focus on recognizing its 16 relationships in the experiment. The train/val/test in it are 13,729/709/5,106 person pairs. \\
+{\bf Datasets.} In this work, two datasets are used to evaluate our proposed method. The first one is the large-scale People in Social Context (PISC) \cite{DBLP:conf/iccv/LiWZK17} with 22,670 images and contains two-level recognition tasks: {\bf 3 Coarse-level relationship}, namely {\it No Relation, Intimate Relation, None-Intimate Relation} and {\bf 6 Fine-level relationship}, i.e., {\it Friend, Family, Couple, Professional, Commercial, No Relation}. The second one is the People in Photo Album Relation (PIPA-relation) \cite{DBLP:conf/cvpr/SunSF17}, an extension version of People in Photo Album (PIPA) \cite{DBLP:conf/cvpr/ZhangPTFB15} with 37107 images. It also annotates 26,915 person pairs on two-level recognition tasks: {\bf 5 Social Domains} and {\bf 16 Social Relations} based on these domains. The train/val/test in PISC are 13,142/4,000/4,000 images with 14,536/25,636/15,497 person pairs on coarse level relationship, and 16,828/500/1,250 images with 55,400/1,505/3,691 person pairs on fine level relationship, respectively. In PIPA-relation, we follow \cite{DBLP:conf/ijcai/WangCRYCL18} and focus on recognizing its 16 relationships in the experiment. The train/val/test in it are 13,729/709/5,106 person pairs. \\
 {\bf Implementation Details.} During our work, We adopt the same strategy as previous works including \cite{DBLP:conf/iccv/LiWZK17} and \cite{DBLP:conf/ijcai/WangCRYCL18}. First, we fine-tune the ResNet-101 model \cite{DBLP:conf/cvpr/HeZRS16} , and we set a lower learning rate as 0.0001. After that, we first freeze the feature extraction module, 
 , and for the message passing progation model, the dimension of hidden size is set as 512. The iteration time of RNNs T is set as 4 and learning rate as 0.0001. Similar to \cite{DBLP:conf/ijcai/WangCRYCL18}, the fine-tuning model utilized SGD, and the all com message passing module is trained with ADAM.
 
@@ -241,20 +240,21 @@ where $\text{N}(I)$ returns the number of person pair in image $I$, $\text{L}(\c
   \caption{Statistic on PISC and PIPA-relation. ``Sui.'' denotes that the percentage of person pair in an image with multiple person pairs. while ``Unsui.'' is its opposite. ``Single Rel.'' represents proportion of the images that have only one category of social relationship, while ``Multi Rel.'' is its opposite.}
   \label{tab:data_analysis}
   \begin{tabular}{c|c|p{0.9cm}<{\centering}|p{0.9cm}<{\centering}||p{0.9cm}<{\centering}|p{0.9cm}<{\centering}}
-    \midrule
+    \hline
     \multicolumn{2}{c|}{Dataset} & Sui. & Unsui. & \tabincell{c}{Single\\Rel.} & \tabincell{c}{Multi\\Rel.} \\
-    \midrule
+    \hline
     \multirow{2}*{PISC} & coarse & 87.1\% & 12.9\% & 79.9\% & 20.1\%\\
     \cline{2-6}
     ~ & fine & 83.9\% & 16.1\% & 86.4\% & 13.6\% \\
-    \midrule
+    \hline
     \multicolumn{2}{c|}{PIPA-relation 16} & 71.9\% & 28.1\% & 94.9\% & 5.1\% \\
-    \midrule
+    \hline
   \end{tabular}
 \end{table}
 
 
-In this subsection, we made an analysis on PISC and PIPA-relation. As shown in table \ref{tab:data_analysis}, we first counted the relationship categories of each image. Specifically, on PISC coarse, 79.9\% of images have only one coarse category, while 20.1\% images have multiple coarse one. Second, 87.1\% and 83.9\% person pairs are the proportion that suitable for interaction in PISC coarse and PISC fine datasets.
+As shown in \ref{tab:data_analysis}, we summarize two conclusions. The first one is that according to ``Sui.'' and ``Unsui.'', the regularity of multiple person pairs appearing in a still image always exists in these datasets. The other is that the social relationships are always similar in a given simple scene, which is found from ``Single Rel.'' and ``Multi Rel.''. Take a conference scene as an example. There are always more than one person pair in this simple scene and its social relationships are almost {\it Colleagues} or {\it presenter\_audience}.
+
 \subsection{Comparisons with State-of-the-Art Methods}
 
 \begin{table*}[htpb]
@@ -296,7 +296,7 @@ In this subsection, we made an analysis on PISC and PIPA-relation. As shown in t
   \end{tabular}
 \end{table}
 
-We compare our proposed model with the existing state-of-the-art methods on both PISC and PIPA-Relation datasets. Formally, the compared methods are as followed:
+We compare our proposed model with the existing state-of-the-art methods on both PISC and PIPA-relation datasets. Formally, the compared methods are as followed:
 
 \subsubsection{Performance On the PISC dataset}
 
@@ -306,9 +306,9 @@ We compare our proposed model with the existing state-of-the-art methods on both
 {\bf Dual-glance}\cite{DBLP:conf/iccv/LiWZK17} implements coarse and fine prediction which includes three and six relationships. Dual-glance employing Pair CNN + BBox + BBox + Union and utilized surrounding region proposal to refine the prediction.\\
 {\bf GRM}\cite{DBLP:conf/ijcai/WangCRYCL18} propose a graph reasoning model that unifies the frequency of co-concurrences of each relationship-object pair to facilitate social relationship Understanding.
 
-Similar to the model of GRM, we also adopt the per-class recall and mean average precision(mAP) to evaluate our model. The experiments data are reported in Table 1. First, both Pair CNN + BBox + Global, Dual-glance and GRM are incur extra Faster-RCNN\cite{DBLP:conf/nips/RenHGS15} to extract the local contextual cues(object proposal). GRM utilized the object proposal to construct a semantic-aware  knowledge graph for reason about the social relationship. It is notable that both of them incur extra detection annotations that contains noisies. Specifically, our model achieves an accuracy of 75.1\% and mAP of 81.8\% for the coarse-level recognition. the model also takes an accuracy of 65.6\% and mAP of 69.7\% for the fine-level dataset, our model beating previous best model in the fine-level recognition ,but slightly lower on coarse-level than the best model before.
+Similar to the model of GRM, we also adopt the per-class recall and mean average precision(mAP) to evaluate our model. The experiments data are reported in Table \ref{tab:pisc_table}. First, both Pair CNN + BBox + Global, Dual-glance and GRM are incur extra Faster-RCNN\cite{DBLP:conf/nips/RenHGS15} to extract the local contextual cues(object proposal). GRM utilized the object proposal to construct a semantic-aware  knowledge graph for reason about the social relationship. It is notable that both of them incur extra detection annotations that contains noisies. Specifically, our model achieves an accuracy of 75.1\% and mAP of 81.8\% for the coarse-level recognition. the model also takes an accuracy of 65.6\% and mAP of 69.7\% for the fine-level dataset, our model beating previous best model in the fine-level recognition ,but slightly lower on coarse-level than the best model before.
 
-\subsubsection{Performance On the PIPA-Relation Dataset}
+\subsubsection{Performance On the PIPA-relation Dataset}
 
 On this dataset, we also compare our proposed model with the existing methods,i.e, Two stream CNN\cite{DBLP:conf/cvpr/SunSF17},Dual-glance\cite{DBLP:conf/iccv/LiWZK17} and GRM\cite{DBLP:conf/ijcai/WangCRYCL18} that achieves the best performance before. Specifically, we directly reprint the experimental of several baselines from the literature. The result are presented in Table 2. Notably, our {\PPRN} significantly outperforms previous methods. Still, our model outperforms all the baselines in PIPA-relation, and beating the best of them 2.4\%.
 
@@ -377,12 +377,12 @@ Four examples in Figure \ref{fig:case_study} are shown to illustrate the ability
 
 \section{Conclusion}
 % This part will be written by {\bf liangjinrui}.
-In this study, we propose a Person-Pair Relation Network(\PPRN) that aims to solve social relationships recognition of an image. The proposed model incorporates the information of contextual relationships. The key challenge is to design a model for interaction between social relationships. {\PPRN} consists of a reasoning module that propagates relationship message through the RNNs. In this way, it improves the quality of relationships prediction. Specifically, a attention also utilized to compute the weights factor for the connected nodes in a social graph, and these weights introduced to aggregates the messages. We also analysis the influence of contextual relationships and contextual object regions, and we found that the cue of contextual object region covered by contextual relationships. Extensive experiments on two large-scale benchmarks(PISC and PIPA-Relation) achieves better performance  without incur extra detection annotations.
+In this study, we propose a Person-Pair Relation Network(\PPRN) that aims to solve social relationships recognition of an image. The proposed model incorporates the information of contextual relationships. The key challenge is to design a model for interaction between social relationships. {\PPRN} consists of a reasoning module that propagates relationship message through the RNNs. In this way, it improves the quality of relationships prediction. Specifically, a attention also utilized to compute the weights factor for the connected nodes in a social graph, and these weights introduced to aggregates the messages. We also analysis the influence of contextual relationships and contextual object regions, and we found that the cue of contextual object region covered by contextual relationships. Extensive experiments on two large-scale benchmarks(PISC and PIPA-relation) achieves better performance  without incur extra detection annotations.
 
 \newpage
 %% The file named.bst is a bibliography style file for BibTeX 0.99c
 \bibliographystyle{named}
 \bibliography{ijcai19}
 
->>>>>>> ecd1be363feb8165a29180e49d380dca8485fec4
+
 \end{document} 
